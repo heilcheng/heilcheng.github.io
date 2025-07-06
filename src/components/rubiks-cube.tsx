@@ -18,10 +18,11 @@ const Cube = ({ position, faceColors, id, isAnimating }: CubeProps) => {
   return (
     <mesh ref={meshRef} position={position}>
       <boxGeometry args={[0.9, 0.9, 0.9]} />
-      <meshStandardMaterial color={faceColors[0]} attach="material-0" /> {/* top */}
-      <meshStandardMaterial color={faceColors[1]} attach="material-1" /> {/* bottom */}
-      <meshStandardMaterial color={faceColors[2]} attach="material-2" /> {/* left */}
-      <meshStandardMaterial color={faceColors[3]} attach="material-3" /> {/* right */}
+      {/* BoxGeometry material order: [right, left, top, bottom, front, back] */}
+      <meshStandardMaterial color={faceColors[3]} attach="material-0" /> {/* right */}
+      <meshStandardMaterial color={faceColors[2]} attach="material-1" /> {/* left */}
+      <meshStandardMaterial color={faceColors[0]} attach="material-2" /> {/* top */}
+      <meshStandardMaterial color={faceColors[1]} attach="material-3" /> {/* bottom */}
       <meshStandardMaterial color={faceColors[4]} attach="material-4" /> {/* front */}
       <meshStandardMaterial color={faceColors[5]} attach="material-5" /> {/* back */}
     </mesh>
