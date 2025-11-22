@@ -17,6 +17,7 @@ const ProjectCard = dynamic(() => import("@/components/project-card").then(mod =
 const ResumeCard = dynamic(() => import("@/components/resume-card").then(mod => mod.ResumeCard), { ssr: false });
 const BookCard = dynamic(() => import("@/components/book-card").then(mod => mod.BookCard), { ssr: false });
 const TableOfContents = dynamic(() => import("@/components/table-of-contents").then(mod => mod.TableOfContents), { ssr: false });
+const Usagi3D = dynamic(() => import("@/components/usagi").then(mod => mod.Usagi3D), { ssr: false });
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
@@ -30,6 +31,9 @@ export default function Page() {
       
       <section id="hero" className="mb-section-lg">
         <div className="w-full space-y-content-lg">
+          <BlurFade delay={BLUR_FADE_DELAY}>
+             <Usagi3D />
+          </BlurFade>
           <div className="gap-2 flex justify-between items-center">
             <div className="flex-col flex flex-1 space-y-1.5">
               <BlurFadeText
