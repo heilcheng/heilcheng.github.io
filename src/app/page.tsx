@@ -35,7 +35,7 @@ export default function Page() {
           </BlurFade>
       </section>
 
-      <section id="duolingo" className="min-h-screen flex flex-col items-center justify-center mb-section-lg bg-neutral-100 dark:bg-neutral-900">
+      <section id="duolingo" className="min-h-screen flex flex-col items-center justify-center mb-section-lg bg-white dark:bg-background">
          <BlurFade delay={BLUR_FADE_DELAY}>
             <h2 className="text-4xl md:text-6xl font-bold text-[#58cc02] mb-8 text-center animate-pulse">
               Spanish or vanish?
