@@ -16,7 +16,6 @@ const BlurFadeText = dynamic(() => import("@/components/magicui/blur-fade-text")
 const ProjectCard = dynamic(() => import("@/components/project-card").then(mod => mod.ProjectCard), { ssr: false });
 const ResumeCard = dynamic(() => import("@/components/resume-card").then(mod => mod.ResumeCard), { ssr: false });
 const BookCard = dynamic(() => import("@/components/book-card").then(mod => mod.BookCard), { ssr: false });
-const Pokeball3D = dynamic(() => import("@/components/pokeball").then(mod => mod.Pokeball3D), { ssr: false });
 const TableOfContents = dynamic(() => import("@/components/table-of-contents").then(mod => mod.TableOfContents), { ssr: false });
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -52,9 +51,10 @@ export default function Page() {
               />
             </div>
             <BlurFade delay={BLUR_FADE_DELAY * 3}>
-              <div className="size-40">
-                <Pokeball3D />
-              </div>
+              <Avatar className="size-28 border">
+                <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
+                <AvatarFallback>{DATA.initials}</AvatarFallback>
+              </Avatar>
             </BlurFade>
           </div>
         </div>
