@@ -164,7 +164,7 @@ export const DATA = {
     },
     {
       title: "Craftscape HK",
-      href: "https://github.com/gracetyy/CraftscapeHK",
+      href: "https://i.imgur.com/8z4eENj.gif",
       dates: "2025",
       active: true,
       description:
@@ -182,12 +182,12 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "",
-      video: "/Craft.mp4",
+      image: "https://i.imgur.com/8z4eENj.gif",
+      video: "",
     },
     {
       title: "Truth or Dare (Cantonese)",
-      href: "https://github.com/heilcheng/Truth-or-Dare-Canto",
+      href: "https://i.imgur.com/GVjLPbi.gif",
       dates: "2024 - Present",
       active: true,
       description:
@@ -205,8 +205,8 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "",
-      video: "/Canto.mp4",
+      image: "https://i.imgur.com/GVjLPbi.gif",
+      video: "",
     },
   ],
   books: [
