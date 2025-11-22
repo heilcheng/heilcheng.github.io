@@ -59,6 +59,15 @@ function Model() {
          ref.current.scale.y = 2.5 + factor;
          ref.current.scale.x = 2.5 - factor * 0.5;
          ref.current.scale.z = 2.5 - factor * 0.5;
+
+         // Follow cursor logic
+         // Map mouse position (-1 to 1) to rotation
+         // We dampen it with lerp for smoothness
+         const targetRotY = state.mouse.x * 0.5; // Look left/right
+         const targetRotX = -state.mouse.y * 0.5; // Look up/down
+         
+         ref.current.rotation.y = THREE.MathUtils.lerp(ref.current.rotation.y, targetRotY, 0.1);
+         ref.current.rotation.x = THREE.MathUtils.lerp(ref.current.rotation.x, targetRotX, 0.1);
      }
   });
 
