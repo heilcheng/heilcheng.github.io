@@ -8,7 +8,7 @@ export function Usagi3D() {
   return (
     <div className="flex flex-col items-center w-full">
       <h2 className="text-2xl font-bold text-center mb-2 animate-bounce text-yellow-600 dark:text-yellow-400">
-        &quot;Ura yaha yaha ura?&quot;
+        Ura yaha yaha ura?
       </h2>
       <div className="h-[50vh] w-full relative">
         <Canvas>
@@ -28,6 +28,9 @@ export function Usagi3D() {
           <OrbitControls enableZoom={false} enablePan={false} minPolarAngle={Math.PI/4} maxPolarAngle={Math.PI/2} />
         </Canvas>
       </div>
+      <h2 className="text-2xl font-bold text-center mt-2 animate-bounce text-yellow-600 dark:text-yellow-400">
+        ハァ？
+      </h2>
     </div>
   );
 }
