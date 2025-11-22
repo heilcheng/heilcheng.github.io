@@ -46,7 +46,7 @@ export default function Page() {
             <img 
               src="https://i.pinimg.com/originals/98/59/12/98591272861e66a02eecf5dae0450c73.gif" 
               alt="Duolingo" 
-              className="max-w-[300px] md:max-w-[500px] w-full rounded-xl shadow-2xl"
+              className="max-w-[300px] md:max-w-[500px] w-full"
             />
          </BlurFade>
       </section>
