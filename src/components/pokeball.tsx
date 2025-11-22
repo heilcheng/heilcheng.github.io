@@ -21,8 +21,8 @@ export function Pokeball3D() {
           </group>
         </Float>
         
-        <Suspense fallback={<SnorlaxPlaceholder />}>
-           <SnorlaxModel />
+        <Suspense fallback={<CharacterPlaceholder />}>
+           <CharacterModel />
         </Suspense>
         
         <ContactShadows position={[0, -4, 0]} opacity={0.4} scale={20} blur={2.5} far={4} />
@@ -32,25 +32,26 @@ export function Pokeball3D() {
   );
 }
 
-function SnorlaxPlaceholder() {
+function CharacterPlaceholder() {
   return (
     <group position={[0, -2.5, 0]} rotation={[0, 0, 0]}>
       <mesh>
          <sphereGeometry args={[2, 32, 32]} />
-         <meshStandardMaterial color="#305e63" roughness={0.8} />
+         <meshStandardMaterial color="#e6c15c" roughness={0.8} />
       </mesh>
     </group>
   );
 }
 
-function SnorlaxModel() {
-  // Expects 'snorlax.glb' in the public folder
-  const { scene } = useGLTF('/snorlax.glb');
+function CharacterModel() {
+  // Expects 'model.glb' (Usagi from Chiikawa) in the public folder
+  const { scene } = useGLTF('/model.glb');
+  // Adjust scale/position as needed for the specific model
   return <primitive object={scene} position={[0, -3.5, 0]} scale={2.5} />;
 }
 
 // Pre-load to avoid waterfall
-useGLTF.preload('/snorlax.glb');
+useGLTF.preload('/model.glb');
 
 function PokeballMesh() {
   const groupRef = useRef<THREE.Group>(null);
