@@ -99,7 +99,7 @@ function parseMove(move: string): { axis: 'x'|'y'|'z', layer: number, angle: num
       if (group.current) {
         matrix.current.setPosition(data.x, data.y, data.z);
         group.current.position.set(data.x, data.y, data.z);
-      }
+  }
     }, [data.x, data.y, data.z]);
 
     // Update transform
@@ -161,7 +161,7 @@ function parseMove(move: string): { axis: 'x'|'y'|'z', layer: number, angle: num
       </mesh>
     );
   };
-
+  
 // --- Main Scene Component ---
 const CubeScene = ({ 
     moveQueue, 
@@ -268,7 +268,7 @@ const CubeScene = ({
           startMatrices: startMats
       };
   };
-
+  
   const finishAnimation = () => {
       const anim = animationState.current;
       // 1. Snap to exact angle
@@ -298,15 +298,15 @@ const CubeScene = ({
       animationState.current.active = false;
       onMoveComplete();
   };
-
+  
   return (
     <group>
        {cubiesData.map((c, i) => (
            <group key={c.id} ref={el => { if (el) cubieRefs.current[i] = el; }} position={[c.x, c.y, c.z]}>
                <mesh>
-                   <boxGeometry args={[0.95, 0.95, 0.95]} />
+        <boxGeometry args={[0.95, 0.95, 0.95]} />
                    <meshStandardMaterial color={PLASTIC_COLOR} roughness={0.5} metalness={0.1} />
-               </mesh>
+      </mesh>
                {Object.entries(c.stickers).map(([face, color]) => (
                    <Sticker key={face} face={face as FaceKey} color={COLOR_MAP[color]} />
                ))}
@@ -319,7 +319,7 @@ const CubeScene = ({
 export default function RubiksCube() {
     const [queue, setQueue] = useState<string[]>([]);
     const [history, setHistory] = useState<string[]>([]);
-    const [isSolving, setIsSolving] = useState(false);
+  const [isSolving, setIsSolving] = useState(false);
     
     // Solver instance (lazy loaded or recreated on scramble)
     const solverRef = useRef<BeginnerSolver | null>(null);
@@ -366,16 +366,16 @@ export default function RubiksCube() {
         console.log("Solution:", solution);
         
         setQueue(prev => [...prev, ...solution]);
-        setIsSolving(true);
+    setIsSolving(true);
         
         // Update history with solution (so next solve works if we scramble again)
         setHistory(prev => [...prev, ...solution]);
-    };
-
+  };
+  
     const onMoveComplete = () => {
         setQueue(prev => prev.slice(1));
         if (queue.length <= 1) {
-            setIsSolving(false);
+          setIsSolving(false);
         }
     };
 
@@ -383,9 +383,9 @@ export default function RubiksCube() {
         // Reload page or just clear everything?
         // Resetting 3D state is hard without unmounting.
         window.location.reload(); // Simple brute force reset
-    };
-
-    return (
+  };
+  
+  return (
         <div className="flex flex-col items-center w-full max-w-4xl mx-auto p-4">
             <div className="relative w-full h-[500px] bg-gray-100 dark:bg-gray-900 rounded-xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-800">
                 <Canvas camera={{ position: [6, 4, 6], fov: 45 }}>
@@ -410,32 +410,32 @@ export default function RubiksCube() {
                             {queue[0]}
                         </div>
                     )}
-                </div>
-
+      </div>
+      
                 <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-4 pointer-events-none">
-                    <button 
+        <button
                         onClick={handleScramble}
                         disabled={queue.length > 0}
                         className="pointer-events-auto px-6 py-3 bg-white dark:bg-gray-800 text-black dark:text-white rounded-full font-semibold shadow-lg hover:scale-105 transition-transform disabled:opacity-50 disabled:scale-100 active:scale-95"
-                    >
-                        Scramble
-                    </button>
-                    <button 
+        >
+          Scramble
+        </button>
+        <button
                         onClick={handleSolve}
                         disabled={queue.length > 0 || history.length === 0}
                         className="pointer-events-auto px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-semibold shadow-lg hover:scale-105 transition-transform disabled:opacity-50 disabled:scale-100 active:scale-95"
-                    >
+        >
                         Solve Cube
-                    </button>
-                     <button 
+        </button>
+        <button
                         onClick={handleReset}
                         className="pointer-events-auto px-6 py-3 bg-red-500/80 text-white rounded-full font-semibold shadow-lg hover:scale-105 transition-transform active:scale-95"
-                    >
-                        Reset
-                    </button>
-                </div>
-            </div>
-            
+        >
+          Reset
+        </button>
+      </div>
+      </div>
+      
             {/* Queue Display */}
             <div className="mt-6 w-full p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm">
                 <h3 className="text-lg font-semibold mb-2">Move Queue ({queue.length})</h3>
@@ -446,11 +446,11 @@ export default function RubiksCube() {
                         queue.map((m, i) => (
                             <span key={i} className={i === 0 ? "text-blue-500 font-bold bg-blue-100 dark:bg-blue-900/30 px-1 rounded" : ""}>
                                 {m}
-                            </span>
+            </span>
                         ))
                     )}
-                </div>
-            </div>
-        </div>
-    );
+          </div>
+          </div>
+    </div>
+  );
 }

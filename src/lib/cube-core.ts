@@ -74,7 +74,7 @@ export function createSolvedState(): CubeState {
         cubies.push({ id: `${x},${y},${z}`, pos, faceColors });
       }
     }
-  }
+      }
   return { cubies };
 }
 
@@ -190,8 +190,8 @@ export function applyMove(state: CubeState, move: string): CubeState {
       } else {
         cubie.pos = rotatePosAroundZ(cubie.pos, dir);
         cubie.faceColors = rotateFaceKeysAroundZ(cubie.faceColors, dir);
-      }
     }
+  }
   }
   
   return s;
