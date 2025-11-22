@@ -100,7 +100,7 @@ const Cubie = ({
       matrix.current.setPosition(data.x, data.y, data.z);
       group.current.position.set(data.x, data.y, data.z);
     }
-  }, []); // Only on mount
+  }, [data.x, data.y, data.z]);
 
   // Update transform
   useFrame(() => {
@@ -422,7 +422,7 @@ export default function RubiksCube() {
                 {/* Overlay UI */}
                 <div className="absolute top-4 left-4 right-4 flex justify-between items-start pointer-events-none">
                     <div className="bg-black/50 backdrop-blur-md text-white p-3 rounded-lg pointer-events-auto">
-                        <h1 className="text-xl font-bold">Rubik's Solver</h1>
+                        <h1 className="text-xl font-bold">Rubik&apos;s Solver</h1>
                         <p className="text-sm opacity-80">Beginner Method Visualization</p>
                     </div>
                     
