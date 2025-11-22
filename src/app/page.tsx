@@ -35,6 +35,22 @@ export default function Page() {
           </BlurFade>
       </section>
 
+      <section id="duolingo" className="min-h-screen flex flex-col items-center justify-center mb-section-lg bg-neutral-100 dark:bg-neutral-900">
+         <BlurFade delay={BLUR_FADE_DELAY}>
+            <h2 className="text-4xl md:text-6xl font-bold text-[#58cc02] mb-8 text-center animate-pulse">
+              Spanish or vanish?
+            </h2>
+         </BlurFade>
+         <BlurFade delay={BLUR_FADE_DELAY * 2}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img 
+              src="https://i.pinimg.com/originals/98/59/12/98591272861e66a02eecf5dae0450c73.gif" 
+              alt="Duolingo" 
+              className="max-w-[300px] md:max-w-[500px] w-full rounded-xl shadow-2xl"
+            />
+         </BlurFade>
+      </section>
+
       <section id="hero" className="mb-section-lg">
         <div className="w-full space-y-content-lg">
           <div className="gap-2 flex justify-between items-center">
