@@ -1,4 +1,5 @@
 
+// @ts-ignore
 import Cube from './thirdparty/cubejs-cube';
 
 type Move = string;
@@ -975,4 +976,3 @@ export class BeginnerSolver {
       return null;
   }
 }
-
