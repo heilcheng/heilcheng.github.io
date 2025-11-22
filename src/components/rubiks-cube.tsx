@@ -17,7 +17,7 @@ const COLOR_MAP: Record<Color, string> = {
   'G': '#009e60', // standard green
   'B': '#0045ad', // standard blue
 };
-const PLASTIC_COLOR = '#1a1a1a';
+const PLASTIC_COLOR = '#2a2a2a';
 
 // Helper to get axis/layer from move string
 function parseMove(move: string): { axis: 'x'|'y'|'z', layer: number, angle: number } {
@@ -73,115 +73,94 @@ function parseMove(move: string): { axis: 'x'|'y'|'z', layer: number, angle: num
   return { axis, layer, angle: baseAngle };
 }
 
-// --- Cubie Component ---
-const Cubie = ({ 
-  data, 
-  animating, 
-  animAxis, 
-  animAngle, 
-  animProgress 
-}: { 
-  data: CubieData; 
-  animating: boolean; 
-  animAxis: 'x'|'y'|'z'; 
-  animAngle: number; 
-  animProgress: number; 
-}) => {
-  const group = useRef<THREE.Group>(null);
-  
-  // Maintain internal transform state
-  // We use a ref to store the "current settled state" matrix
-  // and apply animation on top of it every frame.
-  const matrix = useRef(new THREE.Matrix4());
-  
-  // Initialize matrix once
-  useEffect(() => {
-    if (group.current) {
-      matrix.current.setPosition(data.x, data.y, data.z);
-      group.current.position.set(data.x, data.y, data.z);
-    }
-  }, [data.x, data.y, data.z]);
-
-  // Update transform
-  useFrame(() => {
-    if (!group.current) return;
+  // Main Scene Component
+  const Cubie = ({ 
+    data, 
+    animating, 
+    animAxis, 
+    animAngle, 
+    animProgress 
+  }: { 
+    data: CubieData; 
+    animating: boolean; 
+    animAxis: 'x'|'y'|'z'; 
+    animAngle: number; 
+    animProgress: number; 
+  }) => {
+    const group = useRef<THREE.Group>(null);
     
-    if (animating) {
-       // Create rotation matrix
-       const rot = new THREE.Matrix4();
-       const axisVec = new THREE.Vector3(
-           animAxis==='x'?1:0, 
-           animAxis==='y'?1:0, 
-           animAxis==='z'?1:0
-       );
-       rot.makeRotationAxis(axisVec, animAngle * animProgress);
-       
-       // Combine: CurrentBase * Rotation
-       // Note: Rotation is around WORLD axis, not local.
-       // So we should apply rotation to the position vector.
-       // AND apply rotation to the rotation component.
-       
-       // Simpler:
-       // If we are rotating around X axis (world), we just multiply WorldRotation * CurrentMatrix.
-       // group.matrix = Rot * BaseMatrix.
-       // But React Three Fiber manages matrix if we don't set matrixAutoUpdate=false.
-       // Let's use position/quaternion manually.
-       
-       const currentM = matrix.current.clone();
-       currentM.premultiply(rot);
-       currentM.decompose(group.current.position, group.current.quaternion, group.current.scale);
-    } else {
-       // Just sync with base matrix
-       matrix.current.decompose(group.current.position, group.current.quaternion, group.current.scale);
-    }
-  });
-  
-  // When animation finishes (parent signals this by passing animating=false after updating data),
-  // we need to update our base matrix to the new snapped position.
-  // Actually, the parent 'data' prop will update (x,y,z).
-  // BUT the rotation (orientation) is not in 'data'. 'data' only has x,y,z.
-  // We need to persist the rotation in the Cubie component.
-  // AND we need to update the base matrix when an animation ends.
-  // This suggests the Cubie should be smarter or Parent controls everything.
-  
-  // Let's let Parent control everything? No, too slow to re-render all React nodes.
-  // Use an imperative handle?
-  
-  return (
-    <group ref={group}>
-       <mesh>
-         <boxGeometry args={[0.92, 0.92, 0.92]} />
-         <meshStandardMaterial color={PLASTIC_COLOR} roughness={0.6} metalness={0.1} />
-       </mesh>
-       {/* Stickers */}
-       {Object.entries(data.stickers).map(([face, color]) => (
-         <Sticker key={face} face={face as FaceKey} color={COLOR_MAP[color]} />
-       ))}
-    </group>
-  );
-};
+    // Maintain internal transform state
+    // We use a ref to store the "current settled state" matrix
+    // and apply animation on top of it every frame.
+    const matrix = useRef(new THREE.Matrix4());
+    
+    // Initialize matrix once
+    useEffect(() => {
+      if (group.current) {
+        matrix.current.setPosition(data.x, data.y, data.z);
+        group.current.position.set(data.x, data.y, data.z);
+      }
+    }, [data.x, data.y, data.z]);
 
-// Special sticker component with slightly raised geometry
-const Sticker = ({ face, color }: { face: FaceKey, color: string }) => {
-  const { pos, rot } = useMemo(() => {
-    const offset = 0.47; // Slightly above box surface (0.46)
-    switch (face) {
-      case 'U': return { pos: [0, offset, 0], rot: [-Math.PI/2, 0, 0] };
-      case 'D': return { pos: [0, -offset, 0], rot: [Math.PI/2, 0, 0] };
-      case 'F': return { pos: [0, 0, offset], rot: [0, 0, 0] };
-      case 'B': return { pos: [0, 0, -offset], rot: [0, Math.PI, 0] };
-      case 'R': return { pos: [offset, 0, 0], rot: [0, -Math.PI/2, 0] };
-      case 'L': return { pos: [-offset, 0, 0], rot: [0, Math.PI/2, 0] };
-    }
-  }, [face]);
+    // Update transform
+    useFrame(() => {
+      if (!group.current) return;
+      
+      if (animating) {
+         // Create rotation matrix
+         const rot = new THREE.Matrix4();
+         const axisVec = new THREE.Vector3(
+             animAxis==='x'?1:0, 
+             animAxis==='y'?1:0, 
+             animAxis==='z'?1:0
+         );
+         rot.makeRotationAxis(axisVec, animAngle * animProgress);
+         
+         // Combine: CurrentBase * Rotation
+         const currentM = matrix.current.clone();
+         currentM.premultiply(rot);
+         currentM.decompose(group.current.position, group.current.quaternion, group.current.scale);
+      } else {
+         // Just sync with base matrix
+         matrix.current.decompose(group.current.position, group.current.quaternion, group.current.scale);
+      }
+    });
+    
+    return (
+      <group ref={group}>
+         <mesh>
+           <boxGeometry args={[0.9, 0.9, 0.9]} />
+           <meshStandardMaterial color={PLASTIC_COLOR} roughness={0.6} metalness={0.1} />
+         </mesh>
+         {/* Stickers */}
+         {Object.entries(data.stickers).map(([face, color]) => (
+           <Sticker key={face} face={face as FaceKey} color={COLOR_MAP[color]} />
+         ))}
+      </group>
+    );
+  };
 
-  return (
-    <mesh position={pos as any} rotation={rot as any}>
-      <planeGeometry args={[0.82, 0.82]} />
-      <meshStandardMaterial color={color} roughness={0.2} metalness={0.0} polygonOffset polygonOffsetFactor={-1} />
-    </mesh>
-  );
-};
+  // Special sticker component with slightly raised geometry
+  const Sticker = ({ face, color }: { face: FaceKey, color: string }) => {
+    const { pos, rot } = useMemo(() => {
+      const offset = 0.48; // Slightly above box surface (0.45)
+      switch (face) {
+        case 'U': return { pos: [0, offset, 0], rot: [-Math.PI/2, 0, 0] };
+        case 'D': return { pos: [0, -offset, 0], rot: [Math.PI/2, 0, 0] };
+        case 'F': return { pos: [0, 0, offset], rot: [0, 0, 0] };
+        case 'B': return { pos: [0, 0, -offset], rot: [0, Math.PI, 0] };
+        case 'R': return { pos: [offset, 0, 0], rot: [0, -Math.PI/2, 0] };
+        case 'L': return { pos: [-offset, 0, 0], rot: [0, Math.PI/2, 0] };
+      }
+    }, [face]);
+
+    return (
+      <mesh position={pos as any} rotation={rot as any}>
+        <planeGeometry args={[0.86, 0.86]} />
+        <meshStandardMaterial color={color} roughness={0.2} metalness={0.0} />
+      </mesh>
+    );
+  };
 
 // --- Main Scene Component ---
 const CubeScene = ({ 
@@ -411,8 +390,9 @@ export default function RubiksCube() {
             <div className="relative w-full h-[500px] bg-gray-100 dark:bg-gray-900 rounded-xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-800">
                 <Canvas camera={{ position: [6, 4, 6], fov: 45 }}>
                     <color attach="background" args={['#111']} />
-                    <ambientLight intensity={0.5} />
+                    <ambientLight intensity={1.0} />
                     <directionalLight position={[10, 10, 5]} intensity={1} />
+                    <directionalLight position={[-10, -10, -5]} intensity={1} />
                     <CubeScene moveQueue={queue} onMoveComplete={onMoveComplete} />
                     <OrbitControls makeDefault minDistance={5} maxDistance={20} />
                     <ContactShadows position={[0, -3, 0]} opacity={0.4} scale={20} blur={2} far={4.5} />

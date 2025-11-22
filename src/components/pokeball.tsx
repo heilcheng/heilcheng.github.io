@@ -10,9 +10,10 @@ export function Pokeball3D() {
     <div className="h-[300px] w-full relative">
       <Canvas>
         <PerspectiveCamera makeDefault position={[0, 0, 6]} fov={45} />
-        <ambientLight intensity={0.5} />
+        <ambientLight intensity={0.8} />
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
-        <pointLight position={[-10, -10, -10]} intensity={0.5} />
+        <pointLight position={[-10, -10, -10]} intensity={1} />
+        <directionalLight position={[0, -5, 5]} intensity={1} />
         
         <Float speed={2} rotationIntensity={1} floatIntensity={1}>
           <group rotation={[0.2, -0.5, 0]}>
@@ -64,13 +65,13 @@ function PokeballMesh() {
   return (
     <group ref={groupRef}>
       {/* Top Red Hemisphere */}
-      <mesh material={redMaterial} position={[0, 0.1, 0]} rotation={[0, 0, 0]}>
-        <sphereGeometry args={[2, 64, 32, 0, Math.PI * 2, 0, Math.PI / 2 - 0.15]} />
+      <mesh material={redMaterial} position={[0, 0.04, 0]} rotation={[0, 0, 0]}>
+        <sphereGeometry args={[2, 64, 32, 0, Math.PI * 2, 0, Math.PI / 2 - 0.04]} />
       </mesh>
       
       {/* Bottom White Hemisphere */}
-      <mesh material={whiteMaterial} position={[0, -0.1, 0]} rotation={[Math.PI, 0, 0]}>
-        <sphereGeometry args={[2, 64, 32, 0, Math.PI * 2, 0, Math.PI / 2 - 0.15]} />
+      <mesh material={whiteMaterial} position={[0, -0.04, 0]} rotation={[Math.PI, 0, 0]}>
+        <sphereGeometry args={[2, 64, 32, 0, Math.PI * 2, 0, Math.PI / 2 - 0.04]} />
       </mesh>
       
       {/* Inner Black Sphere (Visible in gap) */}
