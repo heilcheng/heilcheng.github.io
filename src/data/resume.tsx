@@ -182,8 +182,8 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "/Craft.gif",
-      video: "",
+      image: "",
+      video: "/Craft.mp4",
     },
     {
       title: "Truth or Dare (Cantonese)",
@@ -205,8 +205,8 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "/Canto.gif",
-      video: "",
+      image: "",
+      video: "/Canto.mp4",
     },
   ],
   books: [
