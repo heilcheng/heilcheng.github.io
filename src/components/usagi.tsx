@@ -1,8 +1,9 @@
 'use client';
 
-import React, { Suspense } from 'react';
-import { Canvas } from '@react-three/fiber';
+import React, { Suspense, useRef } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, Float, ContactShadows, useGLTF } from '@react-three/drei';
+import * as THREE from 'three';
 
 export function Usagi3D() {
   return (
@@ -48,7 +49,20 @@ function Placeholder() {
 
 function Model() {
   const { scene } = useGLTF('/model.glb');
-  return <primitive object={scene} position={[0, -1, 0]} scale={2.5} rotation={[0, 0, 0]} />;
+  const ref = useRef<THREE.Group>(null);
+
+  useFrame((state) => {
+     const t = state.clock.getElapsedTime();
+     if (ref.current) {
+         // Jelly bounce effect (Squash and Stretch)
+         const factor = Math.sin(t * 15) * 0.15; // Fast wobble
+         ref.current.scale.y = 2.5 + factor;
+         ref.current.scale.x = 2.5 - factor * 0.5;
+         ref.current.scale.z = 2.5 - factor * 0.5;
+     }
+  });
+
+  return <primitive ref={ref} object={scene} position={[0, -1, 0]} scale={2.5} rotation={[0, 0, 0]} />;
 }
 
 useGLTF.preload('/model.glb');
