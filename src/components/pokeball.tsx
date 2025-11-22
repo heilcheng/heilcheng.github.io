@@ -1,32 +1,56 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useRef, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, PerspectiveCamera, Float, ContactShadows } from '@react-three/drei';
+import { OrbitControls, PerspectiveCamera, Float, ContactShadows, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 
 export function Pokeball3D() {
   return (
-    <div className="h-[300px] w-full relative">
+    <div className="h-[600px] w-full relative">
       <Canvas>
-        <PerspectiveCamera makeDefault position={[0, 0, 6]} fov={45} />
+        <PerspectiveCamera makeDefault position={[0, 2, 12]} fov={45} />
         <ambientLight intensity={0.8} />
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
         <pointLight position={[-10, -10, -10]} intensity={1} />
         <directionalLight position={[0, -5, 5]} intensity={1} />
         
         <Float speed={2} rotationIntensity={1} floatIntensity={1}>
-          <group rotation={[0.2, -0.5, 0]}>
+          <group position={[0, 2.5, 0]} rotation={[0.2, -0.5, 0]}>
             <PokeballMesh />
           </group>
         </Float>
         
-        <ContactShadows position={[0, -2, 0]} opacity={0.4} scale={10} blur={2.5} far={4} />
-        <OrbitControls enableZoom={false} enablePan={false} />
+        <Suspense fallback={<SnorlaxPlaceholder />}>
+           <SnorlaxModel />
+        </Suspense>
+        
+        <ContactShadows position={[0, -4, 0]} opacity={0.4} scale={20} blur={2.5} far={4} />
+        <OrbitControls enableZoom={true} enablePan={false} minPolarAngle={0} maxPolarAngle={Math.PI/2 + 0.2} />
       </Canvas>
     </div>
   );
 }
+
+function SnorlaxPlaceholder() {
+  return (
+    <group position={[0, -2.5, 0]} rotation={[0, 0, 0]}>
+      <mesh>
+         <sphereGeometry args={[2, 32, 32]} />
+         <meshStandardMaterial color="#305e63" roughness={0.8} />
+      </mesh>
+    </group>
+  );
+}
+
+function SnorlaxModel() {
+  // Expects 'snorlax.glb' in the public folder
+  const { scene } = useGLTF('/snorlax.glb');
+  return <primitive object={scene} position={[0, -3.5, 0]} scale={2.5} />;
+}
+
+// Pre-load to avoid waterfall
+useGLTF.preload('/snorlax.glb');
 
 function PokeballMesh() {
   const groupRef = useRef<THREE.Group>(null);

@@ -60,7 +60,7 @@ export default function ShowcasePage() {
               </p>
             </div>
           </div>
-          <div className="h-[400px] w-full flex items-center justify-center">
+          <div className="h-[600px] w-full flex items-center justify-center">
             <Pokeball3D />
           </div>
         </div>
