@@ -84,7 +84,8 @@ export function Usagi3D() {
         Ura yaha yaha ura?
       </h2>
       <div className="h-[50vh] w-full relative">
-        <Canvas>
+        <Canvas gl={{ antialias: true, alpha: true }}>
+          <color attach="background" args={['white']} />
           <PerspectiveCamera makeDefault position={[0, 2, 8]} fov={45} />
           <ambientLight intensity={1.0} />
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
@@ -165,21 +166,14 @@ function ExplodingUsagi() {
     progress.current = THREE.MathUtils.lerp(progress.current, target, 0.05);
     
     if (groupRef.current) {
-        // Apply Jelly + Cursor Follow (Standard behavior)
-        // Only apply when NOT fully exploded to keep it clean, or apply always?
-        // Let's apply always for seamless transition.
-        
-        // Jelly bounce
-        const factor = Math.sin(t * 15) * 0.15; 
-        groupRef.current.scale.y = 2.5 + factor;
-        groupRef.current.scale.x = 2.5 - factor * 0.5;
-        groupRef.current.scale.z = 2.5 - factor * 0.5;
-
-        // Follow cursor
+        // Follow cursor (Standard behavior)
         const targetRotY = state.mouse.x * 0.5;
         const targetRotX = -state.mouse.y * 0.5;
         groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, targetRotY, 0.1);
         groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, targetRotX, 0.1);
+        
+        // Reset scale to default (2.5) to remove jelly effect
+        groupRef.current.scale.set(2.5, 2.5, 2.5);
     }
     
     // Update shader uniforms
