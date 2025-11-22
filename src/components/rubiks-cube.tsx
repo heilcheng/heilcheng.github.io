@@ -3,7 +3,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import { OrbitControls, Environment, ContactShadows } from '@react-three/drei';
+import { OrbitControls, ContactShadows } from '@react-three/drei';
 import { createSolvedCubies, type CubieData, type FaceKey, type Color } from '../lib/cube-core';
 import { BeginnerSolver } from '../lib/beginner-solver';
 
@@ -411,7 +411,6 @@ export default function RubiksCube() {
             <div className="relative w-full h-[500px] bg-gray-100 dark:bg-gray-900 rounded-xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-800">
                 <Canvas camera={{ position: [6, 4, 6], fov: 45 }}>
                     <color attach="background" args={['#111']} />
-                    <Environment preset="city" />
                     <ambientLight intensity={0.5} />
                     <directionalLight position={[10, 10, 5]} intensity={1} />
                     <CubeScene moveQueue={queue} onMoveComplete={onMoveComplete} />
