@@ -10,7 +10,7 @@ export function Usagi3D() {
       <h2 className="text-2xl font-bold text-center mb-2 animate-bounce text-yellow-600 dark:text-yellow-400">
         &quot;Ura yaha yaha ura?&quot;
       </h2>
-      <div className="h-[300px] w-full relative">
+      <div className="h-[50vh] w-full relative">
         <Canvas>
           <PerspectiveCamera makeDefault position={[0, 2, 8]} fov={45} />
           <ambientLight intensity={1.0} />

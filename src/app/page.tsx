@@ -29,11 +29,14 @@ export default function Page() {
     <main className="flex flex-col min-h-[100dvh] py-section-md">
       <TableOfContents />
       
-      <section id="hero" className="mb-section-lg">
-        <div className="w-full space-y-content-lg">
-          <BlurFade delay={BLUR_FADE_DELAY}>
+      <section id="landing" className="min-h-[calc(100dvh-4rem)] flex flex-col items-center justify-center mb-section-lg">
+        <BlurFade delay={BLUR_FADE_DELAY}>
              <Usagi3D />
           </BlurFade>
+      </section>
+
+      <section id="hero" className="mb-section-lg">
+        <div className="w-full space-y-content-lg">
           <div className="gap-2 flex justify-between items-center">
             <div className="flex-col flex flex-1 space-y-1.5">
               <BlurFadeText
