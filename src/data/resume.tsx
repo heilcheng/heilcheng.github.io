@@ -163,26 +163,26 @@ export const DATA = {
       video: "",
     },
     {
-      title: "DeepChem Drug Formulation Tutorial",
-      href: "https://github.com/heilcheng/deepchem-drug-formulation",
-      dates: "2024 - Present",
+      title: "Craftscape HK",
+      href: "https://github.com/gracetyy/CraftscapeHK",
+      dates: "2025",
       active: true,
       description:
-        "A tutorial using DeepChem for predicting key pharmaceutical properties and visualizing molecular behaviors for drug discovery.",
+        "AI-powered platform preserving Hong Kong's disappearing traditional crafts through AR experiences, and AI-assisted custom design creation with real-world artisans to bring ideas to life.",
       technologies: [
-        "Python",
-        "DeepChem",
-        "Drug Discovery",
-        "Molecular Biology",
+        "React",
+        "NestJS",
+        "Google Gemini",
+        "AR",
       ],
       links: [
         {
           type: "Source",
-          href: "https://github.com/heilcheng/deepchem-drug-formulation",
+          href: "https://github.com/gracetyy/CraftscapeHK",
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "",
+      image: "/Craft.gif",
       video: "",
     },
     {
