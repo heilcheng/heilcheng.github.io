@@ -7,12 +7,12 @@ import { OrbitControls, PerspectiveCamera, Float, ContactShadows, useGLTF } from
 export function Usagi3D() {
   return (
     <div className="flex flex-col items-center w-full">
-      <h2 className="text-2xl font-bold text-center mb-0 animate-bounce text-yellow-600 dark:text-yellow-400 z-10">
+      <h2 className="text-2xl font-bold text-center -mb-16 animate-bounce text-yellow-600 dark:text-yellow-400 z-10 relative">
         Ura yaha yaha ura?
       </h2>
-      <div className="h-[35vh] w-full relative -my-4">
+      <div className="h-[50vh] w-full relative">
         <Canvas>
-          <PerspectiveCamera makeDefault position={[0, 1, 6]} fov={45} />
+          <PerspectiveCamera makeDefault position={[0, 2, 8]} fov={45} />
           <ambientLight intensity={1.0} />
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
           <pointLight position={[-10, -10, -10]} intensity={1} />
@@ -28,7 +28,7 @@ export function Usagi3D() {
           <OrbitControls enableZoom={false} enablePan={false} minPolarAngle={Math.PI/4} maxPolarAngle={Math.PI/2} />
         </Canvas>
       </div>
-      <h2 className="text-2xl font-bold text-center mt-0 animate-bounce text-yellow-600 dark:text-yellow-400 z-10">
+      <h2 className="text-2xl font-bold text-center -mt-16 animate-bounce text-yellow-600 dark:text-yellow-400 z-10 relative">
         ハァ？
       </h2>
     </div>
