@@ -16,7 +16,6 @@ export function Usagi3D() {
       </h2>
       <div className="h-[50vh] w-full relative">
         <Canvas gl={{ antialias: true, alpha: true }}>
-          <color attach="background" args={['white']} />
           <PerspectiveCamera makeDefault position={[0, 2, 8]} fov={45} />
           <ambientLight intensity={1.0} />
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
