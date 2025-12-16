@@ -7,6 +7,9 @@ import { Suspense } from "react";
 
 export async function generateStaticParams() {
   const posts = await getBlogPosts();
+  if (!posts || posts.length === 0) {
+    return [];
+  }
   return posts.map((post) => ({ slug: post.slug }));
 }
 
