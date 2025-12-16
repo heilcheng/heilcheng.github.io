@@ -130,7 +130,7 @@ export default async function BlogPage() {
               delay={BLUR_FADE_DELAY * 4 + index * 0.05}
             >
               <Link
-                className="group block"
+                className="group flex flex-col gap-2 mb-8"
                 href={post.url}
                 target={post.isExternal ? "_blank" : undefined}
                 rel={post.isExternal ? "noopener noreferrer" : undefined}
@@ -139,44 +139,14 @@ export default async function BlogPage() {
                 data-summary={post.summary.toLowerCase()}
                 data-tags={post.tags?.join(' ').toLowerCase() || ''}
               >
-                <article className="p-8 rounded-2xl border border-border/50 hover:border-border transition-all duration-300 hover:shadow-sm hover:shadow-border/20">
-                  <div className="space-y-4">
-                    <div className="space-y-3">
-                      <div className="flex items-start justify-between">
-                        <h3 className="text-xl font-medium tracking-tight group-hover:text-foreground transition-colors duration-200 flex-1 leading-relaxed">
-                          {post.title}
-                        </h3>
-                        {post.isExternal && (
-                          <ExternalLink className="size-4 text-muted-foreground mt-1 ml-3 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-                        )}
-                      </div>
-                      <p className="text-muted-foreground leading-relaxed">
-                        {post.summary}
-                      </p>
-                    </div>
-                    
-                    <div className="flex items-center justify-between pt-2">
-                      <time className="text-sm text-muted-foreground font-medium">
-                        {formatDate(post.publishedAt)}
-                      </time>
-                      <div className="flex items-center space-x-2">
-                        {post.tags && post.tags.slice(0, 2).map((tag: string) => (
-                          <span
-                            key={tag}
-                            className="text-xs px-3 py-1 rounded-full bg-muted/50 text-muted-foreground font-medium"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                        {post.isExternal && (
-                          <span className="text-xs px-3 py-1 rounded-full bg-muted/50 text-muted-foreground font-medium">
-                            Medium
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </article>
+                <div className="w-full flex flex-col">
+                  <h3 className="text-lg font-medium tracking-tight mb-1 text-foreground">
+                    {post.title}
+                  </h3>
+                  <p className="text-xs text-muted-foreground">
+                    {formatDate(post.publishedAt)}
+                  </p>
+                </div>
               </Link>
             </BlurFade>
           ))}
