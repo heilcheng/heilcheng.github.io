@@ -80,21 +80,18 @@ export default async function BlogPage() {
   });
 
   return (
-    <section className="max-w-3xl mx-auto px-4">
+    <section className="max-w-3xl mx-auto px-4 py-16">
       <BlurFade delay={BLUR_FADE_DELAY}>
-        <div className="mb-16 text-center">
-          <h1 className="font-semibold text-4xl mb-3 tracking-tight">Blog</h1>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            Thoughts on software development, technology, and life in Hong Kong.
-          </p>
+        <div className="mb-12">
+          <h1 className="font-semibold text-2xl mb-1 tracking-tight">blog</h1>
         </div>
       </BlurFade>
 
-      {/* Filter Bar */}
+      {/* Filter Bar - Hidden for now to match the minimalist style, can be re-enabled if needed */}
+      {/* 
       <BlurFade delay={BLUR_FADE_DELAY * 2}>
         <div className="mb-12">
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
-            {/* Search Bar */}
             <div className="relative flex-1 max-w-md">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 size-4 text-muted-foreground" />
               <input
@@ -105,7 +102,6 @@ export default async function BlogPage() {
               />
             </div>
             
-            {/* Category Filter */}
             <div className="flex items-center gap-2">
               <Filter className="size-4 text-muted-foreground" />
               <select 
@@ -120,6 +116,7 @@ export default async function BlogPage() {
           </div>
         </div>
       </BlurFade>
+      */}
       
       {/* Posts Grid */}
       <BlurFade delay={BLUR_FADE_DELAY * 3}>
