@@ -120,14 +120,14 @@ export default async function BlogPage() {
       
       {/* Posts Grid */}
       <BlurFade delay={BLUR_FADE_DELAY * 3}>
-        <div className="space-y-6" id="posts-container">
+        <div className="space-y-0" id="posts-container">
           {sortedPosts.map((post, index) => (
             <BlurFade 
               key={post.type === 'local' ? post.slug : post.url} 
               delay={BLUR_FADE_DELAY * 4 + index * 0.05}
             >
               <Link
-                className="group flex flex-col gap-2 mb-8"
+                className="group flex flex-col mb-4"
                 href={post.url}
                 target={post.isExternal ? "_blank" : undefined}
                 rel={post.isExternal ? "noopener noreferrer" : undefined}
@@ -137,7 +137,7 @@ export default async function BlogPage() {
                 data-tags={post.tags?.join(' ').toLowerCase() || ''}
               >
                 <div className="w-full flex flex-col">
-                  <h3 className="text-lg font-medium tracking-tight mb-1 text-foreground">
+                  <h3 className="text-lg font-medium tracking-tight text-foreground group-hover:underline decoration-neutral-400 underline-offset-4 transition-all duration-300">
                     {post.title}
                   </h3>
                   <p className="text-xs text-muted-foreground">
