@@ -1,6 +1,6 @@
-# My Personal Website & Digital Playground
+# My Personal Website
 
-Welcome to the codebase for my personal website ([heilcheng.github.io](https://heilcheng.github.io)). This project is my digital garden—a place where I experiment with 3D visualizations, interactive maps, and share my thoughts on biology, AI, and philosophy.
+Welcome to the codebase for my personal website ([heilcheng.github.io](https://heilcheng.github.io)).
 
 Built with **Next.js 14**, **Tailwind CSS**, **Magic UI**, and **Three.js**.
 
@@ -8,19 +8,12 @@ Built with **Next.js 14**, **Tailwind CSS**, **Magic UI**, and **Three.js**.
 
 ### 🎮 Interactive 3D Showcase (`/showcase`)
 A collection of 3D experiments and visualizations:
-- **Rubik's Cube Solver**: A fully functional 3D Rubik's Cube implementing the CFOP method (Cross, F2L, OLL, PLL).
 - **Protein Folding**: Visualizing protein structures with pLDDT confidence scores, inspired by AlphaFold.
 - **Torus ↔ Mug Morph**: A topology demonstration morphing a doughnut into a coffee mug.
-- **3D Pokeball**: An interactive, animated 3D model.
 
 ### 🌏 Data-Driven Maps
 - **World Map**: Interactive visualization of visited countries using `react-simple-maps`.
 - **Hong Kong Map**: A personal guide to my favorite spots in HK, built with `react-leaflet`.
-
-### 📚 Digital Garden
-- **Commonplace Book**: A curated collection of books shaping my worldview (Philosophy, History, Digital Privacy).
-- **MDX Blog**: Thoughts on "The Iteration", "The Art of Invisibility", and more.
-- **Ethics Quote**: Randomly generated ethical and philosophical reflections.
 
 ### 🎨 UI & Animations
 - **Magic UI Integration**: Fluid animations including BlurFade, Orbiting Circles, and Dock navigation.
