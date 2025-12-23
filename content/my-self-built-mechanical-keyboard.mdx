@@ -5,71 +5,55 @@ summary: "technical specifications and build log of a custom 50% mechanical keyb
 tags: ["mechanical keyboard", "hardware", "diy", "qmk"]
 ---
 
-## model
-- omega50 rev.b
+<KeyboardCounter />
 
-## layout
-- 50% (5×12, 58 keys)
+### build (2021.12.29)
+<Image 
+  src="/build.jpeg" 
+  alt="keyboard build process" 
+  width={800} 
+  height={600} 
+/>
 
-## case
-- 3d-printed, white
+### my room 2021
+<Image 
+  src="/my-room-2021.jpeg" 
+  alt="my room in 2021 with the keyboard" 
+  width={800} 
+  height={600} 
+/>
 
-## pcb
-- hot-swap
-- usb + bluetooth
+### now (2025)
+<Image 
+  src="/now.jpeg" 
+  alt="current state of the keyboard in 2025" 
+  width={800} 
+  height={600} 
+/>
 
-## firmware
-- qmk
+## specs
+- model: omega50 rev.b
+- layout: 50% (5×12, 58 keys)
+- case: 3d-printed, white
+- pcb: hot-swap (usb + bluetooth)
+- firmware: qmk
 
-## switches
-- alpha keys
-  - gateron white
-  - linear, ~35 g actuation
-- stabilized keys
-  - ttc silent moon white
-  - linear, silent, ~42 g actuation
+## components
+- alpha keys: gateron white (linear, ~35 g)
+- stabilized keys: ttc silent moon white (linear, silent, ~42 g)
+- acoustics: poron internal foam + silencing rings
+- keycaps: pbt blank (no legends), oil-resistant
 
-## acoustics
-- poron internal foam
-- switch silencing rings
-- reduced resonance
-- muted bottom-out
-
-## keycaps
-- pbt
-- blank (no legends)
-  - aesthetic minimalism
-- oil-resistant
-- smooth, consistent feel
-
-## how it was built
-- parts
-  - omega50 rev.b pcb
-  - 3d-printed case (white)
-  - poron dampening foam
-  - hot-swap sockets
-  - pcb stabilizers
-  - gateron white switches (~35 g)
-  - ttc silent moon white switches (~42 g)
-  - pbt blank keycaps
-- assembly
-  - flash qmk firmware to pcb
-  - install pcb stabilizers
-  - place poron foam between pcb and case
-  - mount pcb into case
-  - insert switches (hot-swap)
-    - gateron white: alpha keys
-    - ttc silent moon white: stabilized keys
-  - install silencing rings
-  - install keycaps
-- configuration
-  - define layers in qmk
-  - remap navigation via layers
-  - tune debounce for light switches
-  - test bluetooth and usb modes
+## build process
+- install pcb stabilizers & flash qmk firmware
+- place poron dampening foam between pcb and case
+- mount pcb into 3d-printed case
+- insert switches & install silencing rings
+- install blank pbt keycaps
+- configure layers and navigation in qmk
+- tune debounce settings for light actuation
 
 ## notes
-- light linear switches require stable pcb mounting
-- poron foam reduces mid-frequency resonance
-- mixed switch weights improve control on large keys
-
+- light switches benefit from the added stability of pcb mounting
+- poron foam effectively mutes mid-frequency resonance
+- mixed switch weights provide better control for larger keys

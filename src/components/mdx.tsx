@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
+import { KeyboardCounter } from "./keyboard-counter";
+
 function Table({ data }: { data: { headers: string[]; rows: string[][] } }) {
   let headers = data.headers.map((header, index) => (
     <th key={index}>{header}</th>
@@ -88,4 +90,5 @@ export const globalComponents = {
   Image: RoundedImage,
   a: CustomLink,
   Table,
+  KeyboardCounter,
 };
