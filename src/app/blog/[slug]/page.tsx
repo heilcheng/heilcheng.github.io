@@ -4,6 +4,7 @@ import { formatDate } from "@/lib/utils";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
+import { KeyboardCounter } from "@/components/keyboard-counter";
 
 export async function generateStaticParams() {
   const posts = await getBlogPosts();
@@ -101,6 +102,11 @@ export default async function Blog({
           </p>
         </Suspense>
       </div>
+      {params.slug === "my-self-built-mechanical-keyboard" && (
+        <div className="mb-8">
+          <KeyboardCounter />
+        </div>
+      )}
       <article
         className="prose dark:prose-invert"
         dangerouslySetInnerHTML={{ __html: post.source }}
