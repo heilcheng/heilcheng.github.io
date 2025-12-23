@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { KeyboardCounter } from "@/components/keyboard-counter";
+import { ImageGallery } from "@/components/image-gallery";
 
 export async function generateStaticParams() {
   const posts = await getBlogPosts();
@@ -103,8 +104,9 @@ export default async function Blog({
         </Suspense>
       </div>
       {post.slug === "my-self-built-mechanical-keyboard" && (
-        <div className="mb-12">
+        <div className="flex flex-col gap-0 mb-12">
           <KeyboardCounter />
+          <ImageGallery />
         </div>
       )}
       <article
