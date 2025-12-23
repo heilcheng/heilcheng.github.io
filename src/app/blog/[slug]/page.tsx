@@ -102,8 +102,8 @@ export default async function Blog({
           </p>
         </Suspense>
       </div>
-      {params.slug === "my-self-built-mechanical-keyboard" && (
-        <div className="mb-8">
+      {post.slug === "my-self-built-mechanical-keyboard" && (
+        <div className="mb-12">
           <KeyboardCounter />
         </div>
       )}

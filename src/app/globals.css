@@ -112,6 +112,11 @@
   .prose-spacing {
     @apply space-y-content-sm;
   }
+
+  /* Limit image size in blog posts */
+  .prose img {
+    @apply max-w-md w-full h-auto mx-auto rounded-lg;
+  }
 }
 
   h3 code {
