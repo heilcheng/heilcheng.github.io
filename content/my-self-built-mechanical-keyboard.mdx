@@ -1,0 +1,75 @@
+---
+title: "my self-built mechanical keyboard"
+publishedAt: "2025-12-23"
+summary: "technical specifications and build log of a custom 50% mechanical keyboard"
+tags: ["mechanical keyboard", "hardware", "diy", "qmk"]
+---
+
+## model
+- omega50 rev.b
+
+## layout
+- 50% (5×12, 58 keys)
+
+## case
+- 3d-printed, white
+
+## pcb
+- hot-swap
+- usb + bluetooth
+
+## firmware
+- qmk
+
+## switches
+- alpha keys
+  - gateron white
+  - linear, ~35 g actuation
+- stabilized keys
+  - ttc silent moon white
+  - linear, silent, ~42 g actuation
+
+## acoustics
+- poron internal foam
+- switch silencing rings
+- reduced resonance
+- muted bottom-out
+
+## keycaps
+- pbt
+- blank (no legends)
+  - aesthetic minimalism
+- oil-resistant
+- smooth, consistent feel
+
+## how it was built
+- parts
+  - omega50 rev.b pcb
+  - 3d-printed case (white)
+  - poron dampening foam
+  - hot-swap sockets
+  - pcb stabilizers
+  - gateron white switches (~35 g)
+  - ttc silent moon white switches (~42 g)
+  - pbt blank keycaps
+- assembly
+  - flash qmk firmware to pcb
+  - install pcb stabilizers
+  - place poron foam between pcb and case
+  - mount pcb into case
+  - insert switches (hot-swap)
+    - gateron white: alpha keys
+    - ttc silent moon white: stabilized keys
+  - install silencing rings
+  - install keycaps
+- configuration
+  - define layers in qmk
+  - remap navigation via layers
+  - tune debounce for light switches
+  - test bluetooth and usb modes
+
+## notes
+- light linear switches require stable pcb mounting
+- poron foam reduces mid-frequency resonance
+- mixed switch weights improve control on large keys
+
