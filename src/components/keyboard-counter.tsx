@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 
 export function KeyboardCounter() {
   const [days, setDays] = useState<string>("0.00000000");
-  const buildDate = new Date("2021-12-29T00:00:00");
 
   useEffect(() => {
+    const buildDate = new Date("2021-12-29T00:00:00");
     const update = () => {
       const now = new Date();
       const diff = now.getTime() - buildDate.getTime();
