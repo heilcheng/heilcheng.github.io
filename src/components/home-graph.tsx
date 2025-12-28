@@ -121,7 +121,7 @@ export function HomeGraph() {
 
     const node = container
       .append("g")
-      .selectAll<SVGElement, GraphNode>("g")
+      .selectAll<SVGGElement, GraphNode>("g")
       .data(nodes)
       .join("g")
       .attr("class", "cursor-pointer")
