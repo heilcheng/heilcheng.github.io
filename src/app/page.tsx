@@ -133,13 +133,13 @@ export default function Page() {
       </section>
 
       <section id="work" className="mb-section-lg">
-        <div className="space-y-12">
+        <div className="space-y-4">
           <BlurFade delay={BLUR_FADE_DELAY * 17}>
-            <h2 className="text-xl font-bold">Technical Experience</h2>
+            <h2 className="text-xl font-bold lowercase">cool places i worked at</h2>
           </BlurFade>
-          <div className="space-y-0">
+          <div className="divide-y divide-border/30">
           {DATA.technicalExperience.map((work, id) => (
-              <BlurFade key={work.company} delay={BLUR_FADE_DELAY * 18 + id * 0.05}>
+              <BlurFade key={work.company} delay={BLUR_FADE_DELAY * 18 + id * 0.02}>
                 <TimelineItem
                 logoUrl={work.logoUrl}
                 altText={work.company}
@@ -158,13 +158,13 @@ export default function Page() {
       </section>
 
       <section id="education" className="mb-section-lg">
-        <div className="space-y-12">
+        <div className="space-y-4">
           <BlurFade delay={BLUR_FADE_DELAY * 19}>
-            <h2 className="text-xl font-bold">Education</h2>
+            <h2 className="text-xl font-bold lowercase">education</h2>
           </BlurFade>
-          <div className="space-y-0">
+          <div className="divide-y divide-border/30">
           {DATA.education.map((education, id) => (
-              <BlurFade key={education.school} delay={BLUR_FADE_DELAY * 20 + id * 0.05}>
+              <BlurFade key={education.school} delay={BLUR_FADE_DELAY * 20 + id * 0.02}>
                 <TimelineItem
                 logoUrl={education.logoUrl}
                 altText={education.school}
