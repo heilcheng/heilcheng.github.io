@@ -1,4 +1,5 @@
 import BlurFade from "@/components/magicui/blur-fade";
+import { BlogGraph } from "@/components/blog-graph";
 import { getBlogPosts } from "@/data/blog";
 import { getMediumPosts } from "@/data/medium-posts";
 import { formatDate } from "@/lib/utils";
@@ -85,6 +86,19 @@ export default async function BlogPage() {
         <div className="mb-12">
           <h1 className="font-semibold text-2xl mb-1 tracking-tight">blog</h1>
         </div>
+      </BlurFade>
+
+      {/* Knowledge Graph */}
+      <BlurFade delay={BLUR_FADE_DELAY * 2}>
+        <BlogGraph 
+          posts={sortedPosts.map(post => ({
+            slug: post.type === 'local' ? post.slug : post.url,
+            title: post.title,
+            tags: post.tags || [],
+            isExternal: post.isExternal,
+            url: post.url,
+          }))}
+        />
       </BlurFade>
 
       {/* Filter Bar - Hidden for now to match the minimalist style, can be re-enabled if needed */}
