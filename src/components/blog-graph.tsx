@@ -384,7 +384,7 @@ export function BlogGraph({ posts }: BlogGraphProps) {
     const node = container
       .append("g")
       .attr("class", "nodes")
-      .selectAll("circle")
+      .selectAll<SVGCircleElement, GraphNode>("circle")
       .data(nodes)
       .join("circle")
       .attr("r", (d) => d.radius)
