@@ -41,10 +41,6 @@ export default function Page() {
 
   return (
     <main className="flex flex-col min-h-[100dvh] py-section-md">
-      <BlurFade delay={BLUR_FADE_DELAY}>
-        <HomeGraph />
-      </BlurFade>
-
       <section id="hero" className="mb-section-lg">
         <div className="w-full space-y-content-lg">
           <div className="flex flex-col-reverse md:flex-row gap-8 justify-between items-center md:items-start text-center md:text-left">
@@ -88,6 +84,10 @@ export default function Page() {
           </div>
         </div>
       </section>
+
+      <BlurFade delay={BLUR_FADE_DELAY * 7}>
+        <HomeGraph />
+      </BlurFade>
 
       <section id="about" className="mb-section-lg">
         <div className="space-y-content-md">
