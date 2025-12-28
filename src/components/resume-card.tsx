@@ -77,7 +77,7 @@ export const TimelineItem = ({
       <div className="flex-1 min-w-0">
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0 flex-1">
-            <h3 className="font-semibold text-foreground text-sm lowercase leading-tight">
+            <h3 className="font-semibold text-foreground text-sm leading-tight">
               {title}
             </h3>
             {subtitle && (
@@ -89,7 +89,7 @@ export const TimelineItem = ({
           
           <div className="flex items-center gap-2 flex-shrink-0">
             <span className="text-xs text-muted-foreground whitespace-nowrap">
-              {period.toLowerCase()}
+              {period}
             </span>
             {(description || bullets) && (
               <ChevronRightIcon
