@@ -30,72 +30,58 @@ const BLUR_FADE_DELAY = 0.04;
 export default function Page() {
   const [aboutExpanded, setAboutExpanded] = useState(false);
   const [expandedBooks, setExpandedBooks] = useState<Record<string, boolean>>({});
+  const [projectsExpanded, setProjectsExpanded] = useState(false);
 
   const toggleBookCategory = (theme: string) => {
     setExpandedBooks(prev => ({ ...prev, [theme]: !prev[theme] }));
   };
 
+  // Reorder projects: Craftscape HK (2) and Truth or Dare (3) first, then MEQ-Bench (0) and Gemma (1)
+  const featuredProjects = [DATA.projects[2], DATA.projects[3]];
+  const moreProjects = [DATA.projects[0], DATA.projects[1]];
+
   return (
     <main className="flex flex-col min-h-[100dvh] py-section-md">
       <TableOfContents />
       
-      <section id="landing" className="min-h-[calc(100dvh-4rem)] flex flex-col items-center justify-center mb-section-lg">
-        <BlurFade delay={BLUR_FADE_DELAY}>
-             <Usagi3D />
+      {/* Landing section with rabbit + intro */}
+      <section id="hero" className="min-h-[calc(100dvh-4rem)] flex flex-col items-center justify-center mb-section-lg">
+        <div className="w-full max-w-4xl mx-auto flex flex-col items-center gap-8">
+          {/* Usagi 3D */}
+          <BlurFade delay={BLUR_FADE_DELAY}>
+            <Usagi3D />
           </BlurFade>
-      </section>
-
-      <section id="duolingo" className="min-h-screen flex flex-col items-center justify-center mb-section-lg bg-white dark:bg-background">
-         <BlurFade delay={BLUR_FADE_DELAY}>
-            <h2 className="text-4xl md:text-6xl font-bold text-[#58cc02] mb-8 text-center animate-pulse">
-              Spanish or vanish?
-            </h2>
-         </BlurFade>
-         <BlurFade delay={BLUR_FADE_DELAY * 2}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img 
-              src="https://i.pinimg.com/originals/98/59/12/98591272861e66a02eecf5dae0450c73.gif" 
-              alt="Duolingo" 
-              className="max-w-[300px] md:max-w-[500px] w-full"
+          
+          {/* Intro */}
+          <div className="text-center space-y-4">
+            <BlurFadeText
+              delay={BLUR_FADE_DELAY * 2}
+              className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none"
+              yOffset={8}
+              text={`Hi, I'm ${DATA.name.split(" ")[0]}.`}
             />
-         </BlurFade>
-      </section>
-
-      <section id="hero" className="mb-section-lg">
-        <div className="w-full space-y-content-lg">
-          <div className="gap-2 flex justify-between items-center">
-            <div className="flex-col flex flex-1 space-y-1.5">
-              <BlurFadeText
-                delay={BLUR_FADE_DELAY}
-                className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none"
-                yOffset={8}
-                text={`Hi, I'm ${DATA.name.split(" ")[0]}.`}
-              />
-              <BlurFadeText
-                delay={BLUR_FADE_DELAY * 1.5}
-                className="text-sm text-muted-foreground md:text-base"
-                yOffset={8}
-                text={`In Cantonese, I'm Cheng Hei Lam (鄭曦琳). "Cheng" (chehng), "Hei" (hay), "Lam" (lum as in lumber)`}
-              />
-              <BlurFade delay={BLUR_FADE_DELAY * 2}>
-                <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                  {DATA.description} Currently building @{" "}
-                  <a 
-                    href="https://cognos-lab.com" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="font-medium text-primary hover:text-primary/80 underline decoration-primary/40 underline-offset-2 hover:decoration-primary/60 transition-all duration-200"
-                  >
-                    Cognos Labs
-                  </a>
-                </p>
-              </BlurFade>
-            </div>
             <BlurFade delay={BLUR_FADE_DELAY * 3}>
-              <Avatar className="size-28 border">
-                <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
-                <AvatarFallback>{DATA.initials}</AvatarFallback>
-              </Avatar>
+              <p className="text-sm text-muted-foreground md:text-base">
+                In Cantonese, I&apos;m Cheng Hei Lam (鄭曦琳). &quot;Cheng&quot; (chehng), &quot;Hei&quot; (hay), &quot;Lam&quot; (lum as in lumber)
+              </p>
+            </BlurFade>
+            <BlurFade delay={BLUR_FADE_DELAY * 4}>
+              <p className="max-w-[600px] mx-auto text-muted-foreground md:text-xl">
+                {DATA.description}
+              </p>
+            </BlurFade>
+            <BlurFade delay={BLUR_FADE_DELAY * 5}>
+              <p className="text-muted-foreground md:text-xl">
+                Currently building @{" "}
+                <a 
+                  href="https://cognos-lab.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="font-medium text-primary hover:text-primary/80 underline decoration-primary/40 underline-offset-2 hover:decoration-primary/60 transition-all duration-200"
+                >
+                  Cognos Labs
+                </a>
+              </p>
             </BlurFade>
           </div>
         </div>
@@ -224,15 +210,16 @@ export default function Page() {
               </div>
             </div>
           </BlurFade>
+          
+          {/* Featured Projects (Craftscape HK & Truth or Dare) */}
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto">
-            {DATA.projects.map((project, id) => (
+            {featuredProjects.map((project, id) => (
               <BlurFade
                 key={project.title}
                 delay={BLUR_FADE_DELAY * 23 + id * 0.05}
               >
                 <ProjectCard
                   href={project.href}
-                  key={project.title}
                   title={project.title}
                   description={project.description}
                   dates={project.dates}
@@ -244,6 +231,54 @@ export default function Page() {
               </BlurFade>
             ))}
           </div>
+
+          {/* Expand button */}
+          <BlurFade delay={BLUR_FADE_DELAY * 24}>
+            <div className="flex justify-center">
+              <button
+                onClick={() => setProjectsExpanded(!projectsExpanded)}
+                className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground bg-muted/50 hover:bg-muted rounded-full transition-all duration-200"
+              >
+                {projectsExpanded ? "Show less" : "Show more projects"}
+                <ChevronDown 
+                  className={`w-4 h-4 transition-transform duration-200 ${projectsExpanded ? "rotate-180" : ""}`}
+                />
+              </button>
+            </div>
+          </BlurFade>
+
+          {/* More Projects (MEQ-Bench & Gemma) */}
+          <AnimatePresence>
+            {projectsExpanded && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                className="overflow-hidden"
+              >
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto">
+                  {moreProjects.map((project, id) => (
+                    <BlurFade
+                      key={project.title}
+                      delay={0.05 + id * 0.05}
+                    >
+                      <ProjectCard
+                        href={project.href}
+                        title={project.title}
+                        description={project.description}
+                        dates={project.dates}
+                        tags={project.technologies}
+                        image={project.image}
+                        video={project.video}
+                        links={project.links}
+                      />
+                    </BlurFade>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </section>
 
@@ -350,7 +385,24 @@ export default function Page() {
         </div>
       </section>
 
-      <ContactOrbiting delay={BLUR_FADE_DELAY * 33} />
+      {/* Duolingo section at the end */}
+      <section id="duolingo" className="min-h-screen flex flex-col items-center justify-center mb-section-lg bg-white dark:bg-background">
+        <BlurFade delay={BLUR_FADE_DELAY * 34}>
+          <h2 className="text-4xl md:text-6xl font-bold text-[#58cc02] mb-8 text-center animate-pulse">
+            Spanish or vanish?
+          </h2>
+        </BlurFade>
+        <BlurFade delay={BLUR_FADE_DELAY * 35}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img 
+            src="https://i.pinimg.com/originals/98/59/12/98591272861e66a02eecf5dae0450c73.gif" 
+            alt="Duolingo" 
+            className="max-w-[300px] md:max-w-[500px] w-full"
+          />
+        </BlurFade>
+      </section>
+
+      <ContactOrbiting delay={BLUR_FADE_DELAY * 36} />
     </main>
   );
 }
