@@ -63,7 +63,7 @@ export const DATA = {
       href: "https://deepmind.com",
       badges: [],
       location: "Remote",
-      title: "Open Source Software Developer\nGoogle Summer of Code Participant",
+      title: "Software Developer\nGoogle Summer of Code Participant",
       logoUrl: "/deepmind.jpg",
       start: "May 2025",
       end: "Present",

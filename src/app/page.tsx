@@ -42,7 +42,7 @@ export default function Page() {
   return (
     <main className="flex flex-col min-h-[100dvh] py-section-md">
       <section id="hero" className="mb-section-lg">
-        <div className="w-full space-y-content-lg">
+        <div className="w-full space-y-content-lg px-4 md:px-0">
           <div className="flex flex-col md:flex-row gap-6 md:gap-8 justify-between items-center md:items-start">
             {/* Avatar - shows first on mobile, right on desktop */}
             <BlurFade delay={BLUR_FADE_DELAY * 2} className="md:order-2">
@@ -53,10 +53,10 @@ export default function Page() {
             </BlurFade>
             
             {/* Text content - shows second on mobile, left on desktop */}
-            <div className="flex-col flex flex-1 space-y-3 text-center md:text-left md:order-1">
+            <div className="flex-col flex flex-1 space-y-3 items-center md:items-start text-center md:text-left md:order-1 w-full">
               <BlurFadeText
                 delay={BLUR_FADE_DELAY * 3}
-                className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none"
+                className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none w-full"
                 yOffset={8}
                 text={`Hi, I'm ${DATA.name.split(" ")[0]}.`}
               />
@@ -68,7 +68,7 @@ export default function Page() {
                 </p>
               </BlurFade>
               <BlurFade delay={BLUR_FADE_DELAY * 5}>
-                <p className="max-w-[600px] mx-auto md:mx-0 text-muted-foreground text-base md:text-xl">
+                <p className="max-w-[600px] text-muted-foreground text-base md:text-xl">
                   {DATA.description}
                 </p>
               </BlurFade>
