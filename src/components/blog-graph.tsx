@@ -184,6 +184,46 @@ export function BlogGraph({ posts }: BlogGraphProps) {
     });
   };
 
+  // Handle sidebar item hover - highlight node in graph
+  const handleSidebarHover = useCallback((slug: string | null) => {
+    setHighlightedSlug(slug);
+    
+    if (!svgRef.current) return;
+    
+    const svg = d3.select(svgRef.current);
+    const nodes = svg.selectAll<SVGCircleElement, GraphNode>("circle");
+    const labels = svg.selectAll<SVGTextElement, GraphNode>("text");
+    const links = svg.selectAll<SVGLineElement, GraphLink>("line");
+    
+    if (slug === null) {
+      // Reset all
+      nodes.transition().duration(150)
+        .attr("opacity", 1)
+        .attr("r", (d) => d.radius)
+        .style("filter", (d) => {
+          const count = d.connectionCount || 0;
+          return count >= 3 ? "drop-shadow(0 0 6px rgba(139, 92, 246, 0.4))" : "none";
+        });
+      labels.transition().duration(150).attr("opacity", 1);
+      links.transition().duration(150)
+        .attr("stroke-opacity", (d) => d.type === "content" ? 0.6 : 0.25);
+    } else {
+      // Highlight the selected node
+      nodes.transition().duration(150)
+        .attr("opacity", (d) => d.id === slug ? 1 : 0.25)
+        .attr("r", (d) => d.id === slug ? d.radius * 1.4 : d.radius)
+        .style("filter", (d) => d.id === slug ? "drop-shadow(0 0 12px rgba(139, 92, 246, 0.7))" : "none");
+      labels.transition().duration(150)
+        .attr("opacity", (d) => d.id === slug ? 1 : 0.15);
+      links.transition().duration(150)
+        .attr("stroke-opacity", (d) => {
+          const sourceId = typeof d.source === "object" ? d.source.id : d.source;
+          const targetId = typeof d.target === "object" ? d.target.id : d.target;
+          return sourceId === slug || targetId === slug ? 1 : 0.08;
+        });
+    }
+  }, []);
+
   // Handle resize
   useEffect(() => {
     const updateDimensions = () => {
@@ -550,46 +590,6 @@ export function BlogGraph({ posts }: BlogGraphProps) {
   if (posts.length === 0) {
     return null;
   }
-
-  // Handle sidebar item hover - highlight node in graph
-  const handleSidebarHover = useCallback((slug: string | null) => {
-    setHighlightedSlug(slug);
-    
-    if (!svgRef.current) return;
-    
-    const svg = d3.select(svgRef.current);
-    const nodes = svg.selectAll<SVGCircleElement, GraphNode>("circle");
-    const labels = svg.selectAll<SVGTextElement, GraphNode>("text");
-    const links = svg.selectAll<SVGLineElement, GraphLink>("line");
-    
-    if (slug === null) {
-      // Reset all
-      nodes.transition().duration(150)
-        .attr("opacity", 1)
-        .attr("r", (d) => d.radius)
-        .style("filter", (d) => {
-          const count = d.connectionCount || 0;
-          return count >= 3 ? "drop-shadow(0 0 6px rgba(139, 92, 246, 0.4))" : "none";
-        });
-      labels.transition().duration(150).attr("opacity", 1);
-      links.transition().duration(150)
-        .attr("stroke-opacity", (d) => d.type === "content" ? 0.6 : 0.25);
-    } else {
-      // Highlight the selected node
-      nodes.transition().duration(150)
-        .attr("opacity", (d) => d.id === slug ? 1 : 0.25)
-        .attr("r", (d) => d.id === slug ? d.radius * 1.4 : d.radius)
-        .style("filter", (d) => d.id === slug ? "drop-shadow(0 0 12px rgba(139, 92, 246, 0.7))" : "none");
-      labels.transition().duration(150)
-        .attr("opacity", (d) => d.id === slug ? 1 : 0.15);
-      links.transition().duration(150)
-        .attr("stroke-opacity", (d) => {
-          const sourceId = typeof d.source === "object" ? d.source.id : d.source;
-          const targetId = typeof d.target === "object" ? d.target.id : d.target;
-          return sourceId === slug || targetId === slug ? 1 : 0.08;
-        });
-    }
-  }, []);
 
   return (
     <div
