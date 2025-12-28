@@ -67,11 +67,19 @@ export default function Page() {
                 yOffset={8}
                 text={`In Cantonese, I'm Cheng Hei Lam (鄭曦琳). "Cheng" (chehng), "Hei" (hay), "Lam" (lum as in lumber)`}
               />
-              <BlurFadeText
-                className="max-w-[600px] text-muted-foreground md:text-xl"
-                delay={BLUR_FADE_DELAY * 2}
-                text={DATA.description}
-              />
+              <BlurFade delay={BLUR_FADE_DELAY * 2}>
+                <p className="max-w-[600px] text-muted-foreground md:text-xl">
+                  {DATA.description} Currently building @{" "}
+                  <a 
+                    href="https://cognos-lab.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="font-medium text-primary hover:text-primary/80 underline decoration-primary/40 underline-offset-2 hover:decoration-primary/60 transition-all duration-200"
+                  >
+                    Cognos Labs
+                  </a>
+                </p>
+              </BlurFade>
             </div>
             <BlurFade delay={BLUR_FADE_DELAY * 3}>
               <Avatar className="size-28 border">
