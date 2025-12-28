@@ -20,6 +20,7 @@ const ProjectCard = dynamic(() => import("@/components/project-card").then(mod =
 const ResumeCard = dynamic(() => import("@/components/resume-card").then(mod => mod.ResumeCard), { ssr: false });
 const BookCard = dynamic(() => import("@/components/book-card").then(mod => mod.BookCard), { ssr: false });
 const HomeGraph = dynamic(() => import("@/components/home-graph").then(mod => mod.HomeGraph), { ssr: false });
+const UnifiedGraph = dynamic(() => import("@/components/unified-graph").then(mod => mod.UnifiedGraph), { ssr: false });
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
@@ -30,6 +31,7 @@ export default function Page() {
   const [aboutExpanded, setAboutExpanded] = useState(false);
   const [expandedBooks, setExpandedBooks] = useState<Record<string, boolean>>({});
   const [projectsExpanded, setProjectsExpanded] = useState(false);
+  const [showUnifiedGraph, setShowUnifiedGraph] = useState(false);
 
   const toggleBookCategory = (theme: string) => {
     setExpandedBooks(prev => ({ ...prev, [theme]: !prev[theme] }));
@@ -92,7 +94,22 @@ export default function Page() {
       </section>
 
       <BlurFade delay={BLUR_FADE_DELAY * 7}>
-        <HomeGraph />
+        <div className="mb-4 flex justify-center">
+          <button
+            onClick={() => setShowUnifiedGraph(!showUnifiedGraph)}
+            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-foreground bg-gradient-to-r from-violet-500/10 to-pink-500/10 hover:from-violet-500/20 hover:to-pink-500/20 border border-violet-500/30 rounded-full transition-all duration-200 shadow-sm hover:shadow-md"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            {showUnifiedGraph ? "Hide Blog Integration" : "Integrate with Blog Posts"}
+          </button>
+        </div>
+        {showUnifiedGraph ? (
+          <UnifiedGraph showBlogPosts={true} />
+        ) : (
+          <HomeGraph />
+        )}
       </BlurFade>
 
       <section id="about" className="mb-section-lg">
