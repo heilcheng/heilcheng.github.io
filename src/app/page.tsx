@@ -43,28 +43,37 @@ export default function Page() {
     <main className="flex flex-col min-h-[100dvh] py-section-md">
       <section id="hero" className="mb-section-lg">
         <div className="w-full space-y-content-lg">
-          <div className="flex flex-col-reverse md:flex-row gap-8 justify-between items-center md:items-start text-center md:text-left">
-            <div className="flex-col flex flex-1 space-y-1.5">
+          <div className="flex flex-col md:flex-row gap-6 md:gap-8 justify-between items-center md:items-start">
+            {/* Avatar - shows first on mobile, right on desktop */}
+            <BlurFade delay={BLUR_FADE_DELAY * 2} className="md:order-2">
+              <Avatar className="size-28 border">
+                <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
+                <AvatarFallback>{DATA.initials}</AvatarFallback>
+              </Avatar>
+            </BlurFade>
+            
+            {/* Text content - shows second on mobile, left on desktop */}
+            <div className="flex-col flex flex-1 space-y-3 text-center md:text-left md:order-1">
               <BlurFadeText
-                delay={BLUR_FADE_DELAY * 2}
+                delay={BLUR_FADE_DELAY * 3}
                 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none"
                 yOffset={8}
                 text={`Hi, I'm ${DATA.name.split(" ")[0]}.`}
               />
-              <BlurFade delay={BLUR_FADE_DELAY * 3}>
+              <BlurFade delay={BLUR_FADE_DELAY * 4}>
                 <p className="text-sm text-muted-foreground md:text-base">
                   I&apos;m Hongkongese. In Cantonese, I&apos;m Cheng Hei Lam (鄭曦琳).
                   <br />
                   IPA: /tsʰɛŋ hei lɐm/
                 </p>
               </BlurFade>
-              <BlurFade delay={BLUR_FADE_DELAY * 4}>
-                <p className="max-w-[600px] text-muted-foreground md:text-xl">
+              <BlurFade delay={BLUR_FADE_DELAY * 5}>
+                <p className="max-w-[600px] mx-auto md:mx-0 text-muted-foreground text-base md:text-xl">
                   {DATA.description}
                 </p>
               </BlurFade>
-              <BlurFade delay={BLUR_FADE_DELAY * 5}>
-                <p className="text-muted-foreground md:text-xl">
+              <BlurFade delay={BLUR_FADE_DELAY * 6}>
+                <p className="text-muted-foreground text-base md:text-xl">
                   Currently building at{" "}
                   <a 
                     href="https://cognos-lab.com" 
@@ -78,12 +87,6 @@ export default function Page() {
                 </p>
               </BlurFade>
             </div>
-            <BlurFade delay={BLUR_FADE_DELAY * 6}>
-              <Avatar className="size-28 border">
-                <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
-                <AvatarFallback>{DATA.initials}</AvatarFallback>
-              </Avatar>
-            </BlurFade>
           </div>
         </div>
       </section>
