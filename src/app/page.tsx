@@ -94,22 +94,24 @@ export default function Page() {
       </section>
 
       <BlurFade delay={BLUR_FADE_DELAY * 7}>
-        <div className="mb-4 flex justify-center">
+        <div className="relative">
+          {showUnifiedGraph ? (
+            <UnifiedGraph showBlogPosts={true} />
+          ) : (
+            <HomeGraph />
+          )}
           <button
             onClick={() => setShowUnifiedGraph(!showUnifiedGraph)}
-            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-foreground bg-gradient-to-r from-violet-500/10 to-pink-500/10 hover:from-violet-500/20 hover:to-pink-500/20 border border-violet-500/30 rounded-full transition-all duration-200 shadow-sm hover:shadow-md"
+            className="absolute bottom-4 right-4 z-30 flex items-center gap-2 px-3 py-2 text-xs font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-white/95 hover:bg-gray-50 dark:hover:bg-white border border-gray-200 dark:border-white/20 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg backdrop-blur-sm"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
-            {showUnifiedGraph ? "Hide Blog Integration" : "Integrate with Blog Posts"}
+            <span className="whitespace-nowrap">
+              {showUnifiedGraph ? "Sections Only" : "With Blog Posts"}
+            </span>
           </button>
         </div>
-        {showUnifiedGraph ? (
-          <UnifiedGraph showBlogPosts={true} />
-        ) : (
-          <HomeGraph />
-        )}
       </BlurFade>
 
       <section id="about" className="mb-section-lg">
