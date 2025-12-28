@@ -65,7 +65,7 @@ export default function Page() {
               </BlurFade>
               <BlurFade delay={BLUR_FADE_DELAY * 5}>
                 <p className="text-muted-foreground md:text-xl">
-                  Currently building @{" "}
+                  Currently building at{" "}
                   <a 
                     href="https://cognos-lab.com" 
                     target="_blank" 
@@ -74,6 +74,7 @@ export default function Page() {
                   >
                     Cognos Labs
                   </a>
+                  .
                 </p>
               </BlurFade>
             </div>
@@ -149,7 +150,7 @@ export default function Page() {
       <section id="work" className="mb-section-lg">
         <div className="space-y-4">
           <BlurFade delay={BLUR_FADE_DELAY * 17}>
-            <h2 className="text-xl font-bold lowercase">cool places i worked at</h2>
+            <h2 className="text-xl font-bold">Cool Places I Worked At</h2>
           </BlurFade>
           <div className="divide-y divide-border/30">
           {DATA.technicalExperience.map((work, id) => (
@@ -174,7 +175,7 @@ export default function Page() {
       <section id="education" className="mb-section-lg">
         <div className="space-y-4">
           <BlurFade delay={BLUR_FADE_DELAY * 19}>
-            <h2 className="text-xl font-bold lowercase">education</h2>
+            <h2 className="text-xl font-bold">Education</h2>
           </BlurFade>
           <div className="divide-y divide-border/30">
           {DATA.education.map((education, id) => (
