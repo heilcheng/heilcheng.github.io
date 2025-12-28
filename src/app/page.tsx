@@ -1,6 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import dynamic from "next/dynamic";
+import { ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const GitHubContributions = dynamic(() => import("@/components/github-contributions").then(mod => mod.GitHubContributions), { ssr: false });
 const EthicsQuote = dynamic(() => import("@/components/ethics-quote").then(mod => mod.EthicsQuote), { ssr: false });
@@ -25,6 +28,13 @@ import { DATA } from "@/data/resume";
 const BLUR_FADE_DELAY = 0.04;
 
 export default function Page() {
+  const [aboutExpanded, setAboutExpanded] = useState(false);
+  const [expandedBooks, setExpandedBooks] = useState<Record<string, boolean>>({});
+
+  const toggleBookCategory = (theme: string) => {
+    setExpandedBooks(prev => ({ ...prev, [theme]: !prev[theme] }));
+  };
+
   return (
     <main className="flex flex-col min-h-[100dvh] py-section-md">
       <TableOfContents />
@@ -93,36 +103,50 @@ export default function Page() {
 
       <section id="about" className="mb-section-lg">
         <div className="space-y-content-md">
-        <BlurFade delay={BLUR_FADE_DELAY * 10}>
-          <h2 className="text-xl font-bold">About</h2>
-        </BlurFade>
-          <div className="space-y-content-sm">
-        <BlurFade delay={BLUR_FADE_DELAY * 11}>
-          <p className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
-            I&apos;m a Homo sapiens born and raised in Hong Kong. I also spent a year studying in the UK and semesters in the US and France, experiences that opened my mind and shaped how I see the world.
-          </p>
-        </BlurFade>
-        <BlurFade delay={BLUR_FADE_DELAY * 12}>
-              <p className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
-            Before university, I was that kid obsessed with biology and completely hooked on the Olympiad. I loved exploring the mysteries of life. But after countless hours pipetting in the lab, I started to feel burnt out. I realized I loved biology, just not the endless wet lab work.
-          </p>
-        </BlurFade>
-        <BlurFade delay={BLUR_FADE_DELAY * 13}>
-              <p className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
-            At the same time, I discovered the beauty and speed of simulations, where you can explore complex systems without spilling a single drop. One day, I had a lightbulb moment: &ldquo;What if I could use math and code to solve big biology questions instead?&rdquo; That idea completely changed my path.
-          </p>
-        </BlurFade>
-        <BlurFade delay={BLUR_FADE_DELAY * 14}>
-              <p className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
-            And so, here I am, merging my love for biology with the power of math and computation.
-          </p>
-        </BlurFade>
-        <BlurFade delay={BLUR_FADE_DELAY * 15}>
-              <p className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
-            When I&apos;m not coding or solving equations, you&apos;ll find me kayaking, playing tennis, or on a mission to hunt down the best ramen and handmade pasta in Hong Kong (I might have tried them all by now). And when it comes to boba, it&apos;s always &ldquo;No.1&rdquo; at Comebuytea.
-          </p>
-        </BlurFade>
-          </div>
+          <BlurFade delay={BLUR_FADE_DELAY * 10}>
+            <div className="flex items-center gap-3">
+              <h2 className="text-xl font-bold">About</h2>
+              <button
+                onClick={() => setAboutExpanded(!aboutExpanded)}
+                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground bg-muted/50 hover:bg-muted rounded-full transition-all duration-200"
+              >
+                {aboutExpanded ? "Hide" : "Read more"}
+                <ChevronDown 
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${aboutExpanded ? "rotate-180" : ""}`}
+                />
+              </button>
+            </div>
+          </BlurFade>
+          
+          <AnimatePresence>
+            {aboutExpanded && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                className="overflow-hidden"
+              >
+                <div className="space-y-content-sm">
+                  <p className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
+                    I&apos;m a Homo sapiens born and raised in Hong Kong. I also spent a year studying in the UK and semesters in the US and France, experiences that opened my mind and shaped how I see the world.
+                  </p>
+                  <p className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
+                    Before university, I was that kid obsessed with biology and completely hooked on the Olympiad. I loved exploring the mysteries of life. But after countless hours pipetting in the lab, I started to feel burnt out. I realized I loved biology, just not the endless wet lab work.
+                  </p>
+                  <p className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
+                    At the same time, I discovered the beauty and speed of simulations, where you can explore complex systems without spilling a single drop. One day, I had a lightbulb moment: &ldquo;What if I could use math and code to solve big biology questions instead?&rdquo; That idea completely changed my path.
+                  </p>
+                  <p className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
+                    And so, here I am, merging my love for biology with the power of math and computation.
+                  </p>
+                  <p className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
+                    When I&apos;m not coding or solving equations, you&apos;ll find me kayaking, playing tennis, or on a mission to hunt down the best ramen and handmade pasta in Hong Kong (I might have tried them all by now). And when it comes to boba, it&apos;s always &ldquo;No.1&rdquo; at Comebuytea.
+                  </p>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </section>
 
@@ -242,28 +266,47 @@ export default function Page() {
             </div>
           </BlurFade>
           <BlurFade delay={BLUR_FADE_DELAY * 26}>
-            <div className="space-y-content-lg">
+            <div className="space-y-4">
               {DATA.books.map((themeGroup, themeId) => (
-                <div key={themeGroup.theme} className="space-y-content-sm">
+                <div key={themeGroup.theme}>
                   <BlurFade delay={BLUR_FADE_DELAY * 27 + themeId * 0.1}>
-                    <h3 className="text-lg font-semibold text-muted-foreground">
-                      {themeGroup.theme}
-                    </h3>
-                  </BlurFade>
-                  <ul className="mb-4 ml-4 divide-y divide-dashed border-l">
-                    {themeGroup.books.map((book, bookId) => (
-                      <BlurFade
-                        key={book.title + book.author}
-                        delay={BLUR_FADE_DELAY * 28 + themeId * 0.1 + bookId * 0.05}
-                      >
-                        <BookCard
-                          title={book.title}
-                          author={book.author}
-                          number={book.number}
+                    <button
+                      onClick={() => toggleBookCategory(themeGroup.theme)}
+                      className="flex items-center gap-2 w-full text-left group"
+                    >
+                      <h3 className="text-lg font-semibold text-muted-foreground group-hover:text-foreground transition-colors">
+                        {themeGroup.theme}
+                      </h3>
+                      <span className="flex items-center gap-1.5 px-2 py-1 text-xs font-medium text-muted-foreground group-hover:text-foreground bg-muted/50 group-hover:bg-muted rounded-full transition-all duration-200">
+                        {expandedBooks[themeGroup.theme] ? "Hide" : `${themeGroup.books.length} ${themeGroup.books.length === 1 ? "book" : "books"}`}
+                        <ChevronDown 
+                          className={`w-3 h-3 transition-transform duration-200 ${expandedBooks[themeGroup.theme] ? "rotate-180" : ""}`}
                         />
-                      </BlurFade>
-                    ))}
-                  </ul>
+                      </span>
+                    </button>
+                  </BlurFade>
+                  <AnimatePresence>
+                    {expandedBooks[themeGroup.theme] && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <ul className="mt-3 mb-4 ml-4 divide-y divide-dashed border-l">
+                          {themeGroup.books.map((book) => (
+                            <BookCard
+                              key={book.title + book.author}
+                              title={book.title}
+                              author={book.author}
+                              number={book.number}
+                            />
+                          ))}
+                        </ul>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               ))}
             </div>
