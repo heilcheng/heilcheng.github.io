@@ -44,44 +44,52 @@ export default function Page() {
     <main className="flex flex-col min-h-[100dvh] py-section-md">
       <TableOfContents />
       
-      {/* Landing section with rabbit + intro */}
-      <section id="hero" className="min-h-[calc(100dvh-4rem)] flex flex-col items-center justify-center mb-section-lg">
-        <div className="w-full max-w-4xl mx-auto flex flex-col items-center gap-8">
-          {/* Usagi 3D */}
-          <BlurFade delay={BLUR_FADE_DELAY}>
-            <Usagi3D />
-          </BlurFade>
-          
-          {/* Intro */}
-          <div className="text-center space-y-4">
-            <BlurFadeText
-              delay={BLUR_FADE_DELAY * 2}
-              className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none"
-              yOffset={8}
-              text={`Hi, I'm ${DATA.name.split(" ")[0]}.`}
-            />
-            <BlurFade delay={BLUR_FADE_DELAY * 3}>
-              <p className="text-sm text-muted-foreground md:text-base">
-                In Cantonese, I&apos;m Cheng Hei Lam (鄭曦琳). &quot;Cheng&quot; (chehng), &quot;Hei&quot; (hay), &quot;Lam&quot; (lum as in lumber)
-              </p>
-            </BlurFade>
-            <BlurFade delay={BLUR_FADE_DELAY * 4}>
-              <p className="max-w-[600px] mx-auto text-muted-foreground md:text-xl">
-                {DATA.description}
-              </p>
-            </BlurFade>
-            <BlurFade delay={BLUR_FADE_DELAY * 5}>
-              <p className="text-muted-foreground md:text-xl">
-                Currently building @{" "}
-                <a 
-                  href="https://cognos-lab.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="font-medium text-primary hover:text-primary/80 underline decoration-primary/40 underline-offset-2 hover:decoration-primary/60 transition-all duration-200"
-                >
-                  Cognos Labs
-                </a>
-              </p>
+      {/* Landing section with rabbit */}
+      <section id="landing" className="mb-0 -mt-10">
+        <BlurFade delay={BLUR_FADE_DELAY}>
+          <Usagi3D />
+        </BlurFade>
+      </section>
+
+      <section id="hero" className="mb-section-lg">
+        <div className="w-full space-y-content-lg">
+          <div className="flex flex-col-reverse md:flex-row gap-8 justify-between items-center md:items-start text-center md:text-left">
+            <div className="flex-col flex flex-1 space-y-1.5">
+              <BlurFadeText
+                delay={BLUR_FADE_DELAY * 2}
+                className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none"
+                yOffset={8}
+                text={`Hi, I'm ${DATA.name.split(" ")[0]}.`}
+              />
+              <BlurFade delay={BLUR_FADE_DELAY * 3}>
+                <p className="text-sm text-muted-foreground md:text-base">
+                  In Cantonese, I&apos;m Cheng Hei Lam (鄭曦琳). &quot;Cheng&quot; (chehng), &quot;Hei&quot; (hay), &quot;Lam&quot; (lum as in lumber)
+                </p>
+              </BlurFade>
+              <BlurFade delay={BLUR_FADE_DELAY * 4}>
+                <p className="max-w-[600px] text-muted-foreground md:text-xl">
+                  {DATA.description}
+                </p>
+              </BlurFade>
+              <BlurFade delay={BLUR_FADE_DELAY * 5}>
+                <p className="text-muted-foreground md:text-xl">
+                  Currently building @{" "}
+                  <a 
+                    href="https://cognos-lab.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="font-medium text-primary hover:text-primary/80 underline decoration-primary/40 underline-offset-2 hover:decoration-primary/60 transition-all duration-200"
+                  >
+                    Cognos Labs
+                  </a>
+                </p>
+              </BlurFade>
+            </div>
+            <BlurFade delay={BLUR_FADE_DELAY * 6}>
+              <Avatar className="size-28 border">
+                <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
+                <AvatarFallback>{DATA.initials}</AvatarFallback>
+              </Avatar>
             </BlurFade>
           </div>
         </div>
