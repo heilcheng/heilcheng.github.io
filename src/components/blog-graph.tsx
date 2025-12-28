@@ -584,7 +584,7 @@ export function BlogGraph({ posts }: BlogGraphProps) {
         .scale(initialScale)
     );
 
-    return () => simulation.stop();
+    return () => { simulation.stop(); };
   }, [posts, dimensions, handleNodeClick]);
 
   if (posts.length === 0) {
