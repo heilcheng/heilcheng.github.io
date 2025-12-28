@@ -53,7 +53,9 @@ export default function Page() {
               />
               <BlurFade delay={BLUR_FADE_DELAY * 3}>
                 <p className="text-sm text-muted-foreground md:text-base">
-                  In Cantonese, I&apos;m Cheng Hei Lam (鄭曦琳). &quot;Cheng&quot; (chehng), &quot;Hei&quot; (hay), &quot;Lam&quot; (lum as in lumber)
+                  I&apos;m Hongkongese. In Cantonese, I&apos;m Cheng Hei Lam (鄭曦琳).
+                  <br />
+                  IPA: /tsʰɛŋ hei lɐm/
                 </p>
               </BlurFade>
               <BlurFade delay={BLUR_FADE_DELAY * 4}>
