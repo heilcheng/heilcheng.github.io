@@ -46,6 +46,19 @@ export const DATA = {
 
   technicalExperience: [
     {
+      company: "Cognos Labs",
+      href: "https://cognos-lab.com",
+      badges: [],
+      location: "Hong Kong",
+      title: "Member of Technical Staff",
+      logoUrl: "/cognoslabs.jpeg",
+      start: "January 2026",
+      end: "Present",
+      bullets: [
+        "Builds next-generation neurorehabilitation systems by combining multimodal sensing, adaptive AI, and neuroscience-informed design."
+      ],
+    },
+    {
       company: "Google DeepMind",
       href: "https://deepmind.com",
       badges: [],
@@ -57,20 +70,6 @@ export const DATA = {
       bullets: [
         "Engineered a scalable model evaluation platform using Python, PyTorch, and Docker, which improved benchmarking efficiency by 15% and supported parallel execution across 5+ academic test suites (e.g., MMLU, HumanEval)",
         "Designed and deployed a fully automated CI/CD pipeline with GitHub Actions to enforce 95% unit test coverage, guaranteeing reproducible, production-ready builds for a system"
-      ],
-    },
-    {
-      company: "Stealth Startup",
-      badges: [],
-      href: "#",
-      location: "Hong Kong",
-      title: "Co-Founder & Machine Learning Engineer",
-      logoUrl: "/Stealth.jpeg",
-      start: "November 2024",
-      end: "Present",
-      bullets: [
-        "Building next-generation AI products in stealth mode. Details coming soon!",
-        "Leading the development of proprietary deep learning models and scalable infrastructure for confidential projects."
       ],
     },
     {
