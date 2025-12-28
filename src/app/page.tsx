@@ -19,8 +19,7 @@ const BlurFadeText = dynamic(() => import("@/components/magicui/blur-fade-text")
 const ProjectCard = dynamic(() => import("@/components/project-card").then(mod => mod.ProjectCard), { ssr: false });
 const ResumeCard = dynamic(() => import("@/components/resume-card").then(mod => mod.ResumeCard), { ssr: false });
 const BookCard = dynamic(() => import("@/components/book-card").then(mod => mod.BookCard), { ssr: false });
-const TableOfContents = dynamic(() => import("@/components/table-of-contents").then(mod => mod.TableOfContents), { ssr: false });
-const Usagi3D = dynamic(() => import("@/components/usagi").then(mod => mod.Usagi3D), { ssr: false });
+const HomeGraph = dynamic(() => import("@/components/home-graph").then(mod => mod.HomeGraph), { ssr: false });
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
@@ -42,14 +41,9 @@ export default function Page() {
 
   return (
     <main className="flex flex-col min-h-[100dvh] py-section-md">
-      <TableOfContents />
-      
-      {/* Landing section with rabbit */}
-      <section id="landing" className="mb-0 -mt-10">
-        <BlurFade delay={BLUR_FADE_DELAY}>
-          <Usagi3D />
-        </BlurFade>
-      </section>
+      <BlurFade delay={BLUR_FADE_DELAY}>
+        <HomeGraph />
+      </BlurFade>
 
       <section id="hero" className="mb-section-lg">
         <div className="w-full space-y-content-lg">
