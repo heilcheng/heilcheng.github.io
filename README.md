@@ -1,6 +1,6 @@
 # Personal Portfolio & Digital Garden
 
-Interactive portfolio built with Next.js 14, featuring knowledge graphs, 3D visualizations, and geospatial maps. Live at [heilcheng.github.io](https://heilcheng.github.io).
+Interactive portfolio built with Next.js 14, featuring knowledge graphs, 3D visualizations, and geospatial maps. Live at [haileycheng.com](https://haileycheng.com).
 
 ## Key Features
 

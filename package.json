@@ -2,7 +2,7 @@
   "name": "heilcheng-portfolio",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://heilcheng.github.io",
+  "homepage": "https://haileycheng.com",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
