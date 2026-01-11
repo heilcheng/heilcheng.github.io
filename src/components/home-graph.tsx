@@ -220,7 +220,7 @@ export function HomeGraph() {
 
     const svg = d3
       .select(svgRef.current)
-      .attr("viewBox", [0, 0, width, height])
+      .attr("viewBox", `0 0 ${width} ${height}`)
       .attr("width", "100%")
       .attr("height", height);
 
