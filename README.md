@@ -1,23 +1,25 @@
 # Portfolio
 
-Interactive portfolio of **Hailey Cheng** (Math Junior, AI & Bio Researcher) built with Next.js 14. Live at [haileycheng.com](https://haileycheng.com).
+Interactive portfolio built with Next.js 14. Live at [haileycheng.com](https://haileycheng.com).
 
-## Overview
+## Technical Features
 
-This website serves as a portfolio and blog, visualizing my research and projects through interactive interfaces.
+### Obsidian-style Knowledge Graph
+A force-directed graph visualization powered by **D3.js** that continuously links content nodes:
+- **Dynamic Linking**: Automatically connects blog posts and portfolio sections (Home, Blog, Showcase) into an interactive network.
+- **Interactive Physics**: Features custom force simulation with collision detection, drag capabilities, and zoomable navigation.
 
-### Content Highlights
-- **Research**: Mathematical Biology and AI for biomedicine (e.g., *MEQ-Bench*, *Gemma Benchmark Suite*).
-- **Projects**: Web & Mobile apps like *Craftscape HK* and *Truth or Dare (Cantonese)*.
-- **Knowledge Graph**: Interactive D3.js visualization of semantic relationships between content.
-- **Geospatial Visualization**: Maps tracking visited countries and local spots in Hong Kong.
+### Data Visualizations
+- **GitHub Contributions**: Integrated visualization of coding activity and streaks.
+- **Interactive Maps**:
+  - **World Map**: Visualization of visited countries using `react-simple-maps` and TopoJSON.
+  - **Local Map**: Detailed Hong Kong map built with `React Leaflet` for highlighting specific locations.
 
 ## Tech Stack
 
 - **Core**: Next.js 14 (App Router), TypeScript, React 18
 - **Styling**: Tailwind CSS, shadcn/ui, Framer Motion
-- **Visualization**: D3.js, React Leaflet, react-simple-maps
-- **3D**: Three.js, React Three Fiber
+- **3D & Graphics**: Three.js, React Three Fiber, D3.js
 - **Content**: MDX, gray-matter
 
 ## Development
@@ -28,13 +30,9 @@ pnpm dev           # Start dev server
 pnpm build         # Build for production
 ```
 
-## Deployment
-
-Automated via GitHub Actions. Pushing to `main` triggers a build and deployment to GitHub Pages.
-
 ## Credits
 
-Original template by [Dillion Verma](https://github.com/dillionverma/portfolio).
+Original template designed by [Dillion Verma](https://github.com/dillionverma/portfolio).
 
 ## License
 
