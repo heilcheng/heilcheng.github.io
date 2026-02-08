@@ -64,19 +64,19 @@ export const EthicsQuote = ({ delay = 0 }: EthicsQuoteProps) => {
       className="space-y-content-md"
     >
       {/* Section title with toggle button */}
-      <div className="flex items-center gap-3">
-        <h2 className="text-xl font-bold">Featured on Wikipedia</h2>
+      <div className="flex flex-col items-center gap-3">
+        <h2 className="text-2xl font-bold text-center">Featured on Wikipedia.</h2>
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground bg-muted/50 hover:bg-muted rounded-full transition-all duration-200"
+          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground bg-white/50 dark:bg-white/10 hover:bg-white/70 dark:hover:bg-white/20 rounded-full transition-all duration-200 backdrop-blur-sm"
         >
           {isExpanded ? "Hide" : "Read more"}
-          <ChevronDown 
+          <ChevronDown
             className={`w-3.5 h-3.5 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
           />
         </button>
       </div>
-      
+
       {/* Collapsible content */}
       <AnimatePresence>
         {isExpanded && (
@@ -111,7 +111,7 @@ export const EthicsQuote = ({ delay = 0 }: EthicsQuoteProps) => {
               className="flex justify-center mt-6"
             >
               <div className="w-full max-w-4xl">
-                <Safari 
+                <Safari
                   url="en.wikipedia.org/wiki/MediSafe_controversy"
                   imageSrc="/wikipedia.png?v=2"
                   className="w-full h-auto shadow-2xl"

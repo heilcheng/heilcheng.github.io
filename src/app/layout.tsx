@@ -50,6 +50,17 @@ export const metadata: Metadata = {
   },
 };
 
+function AmbientBackground() {
+  return (
+    <div className="ambient-bg" aria-hidden="true">
+      <div className="ambient-orb ambient-orb-1" />
+      <div className="ambient-orb ambient-orb-2" />
+      <div className="ambient-orb ambient-orb-3" />
+      <div className="ambient-orb ambient-orb-4" />
+    </div>
+  );
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -65,8 +76,9 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="light">
           <TooltipProvider delayDuration={0}>
-            <div className="max-w-2xl mx-auto px-container-padding">
-            {children}
+            <AmbientBackground />
+            <div className="relative z-10 max-w-3xl mx-auto px-container-padding">
+              {children}
             </div>
             <Navbar />
           </TooltipProvider>

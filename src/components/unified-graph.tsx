@@ -298,7 +298,7 @@ export function UnifiedGraph({ showBlogPosts }: UnifiedGraphProps) {
         .attr("r", (d) => d.radius)
         .style("filter", (d) => {
           const count = d.connectionCount || 0;
-          return count >= 3 ? "drop-shadow(0 0 6px rgba(139, 92, 246, 0.4))" : "none";
+          return count >= 3 ? "drop-shadow(0 0 6px rgba(142, 177, 194, 0.4))" : "none";
         });
       labels.transition().duration(150).attr("opacity", 1);
       links.transition().duration(150)
@@ -307,7 +307,7 @@ export function UnifiedGraph({ showBlogPosts }: UnifiedGraphProps) {
       nodes.transition().duration(150)
         .attr("opacity", (d) => d.id === id ? 1 : 0.25)
         .attr("r", (d) => d.id === id ? d.radius * 1.4 : d.radius)
-        .style("filter", (d) => d.id === id ? "drop-shadow(0 0 12px rgba(139, 92, 246, 0.7))" : "none");
+        .style("filter", (d) => d.id === id ? "drop-shadow(0 0 12px rgba(142, 177, 194, 0.7))" : "none");
       labels.transition().duration(150)
         .attr("opacity", (d) => d.id === id ? 1 : 0.15);
       links.transition().duration(150)
@@ -426,7 +426,7 @@ export function UnifiedGraph({ showBlogPosts }: UnifiedGraphProps) {
       .selectAll("line")
       .data(links)
       .join("line")
-      .attr("stroke", "#8b5cf6")
+      .attr("stroke", "#8eb1c2")
       .attr("stroke-opacity", 0.4)
       .attr("stroke-width", (d) => Math.sqrt(d.strength));
 
@@ -440,22 +440,22 @@ export function UnifiedGraph({ showBlogPosts }: UnifiedGraphProps) {
       .attr("fill", (d) => {
         if (d.type === "blog") return "#ec4899"; // Pink for blogs
         const count = d.connectionCount || 0;
-        if (count >= 4) return "#7c3aed";
-        if (count >= 2) return "#8b5cf6";
-        if (count >= 1) return "#a78bfa";
-        return "#c4b5fd";
+        if (count >= 4) return "#6a9aad";
+        if (count >= 2) return "#8eb1c2";
+        if (count >= 1) return "#a7c8d4";
+        return "#d4e5eb";
       })
-      .attr("stroke", (d) => d.type === "blog" ? "#be185d" : "#6d28d9")
+      .attr("stroke", (d) => d.type === "blog" ? "#be185d" : "#5a8a9d")
       .attr("stroke-width", 2)
       .attr("class", "cursor-pointer transition-all duration-200")
-      .style("filter", "drop-shadow(0 0 4px rgba(139, 92, 246, 0.3))")
+      .style("filter", "drop-shadow(0 0 4px rgba(142, 177, 194, 0.3))")
       .on("mouseenter", function (event, d) {
         setHoveredNode(d);
         d3.select(this)
           .transition()
           .duration(150)
           .attr("r", d.radius * 1.5)
-          .style("filter", "drop-shadow(0 0 12px rgba(139, 92, 246, 0.8))");
+          .style("filter", "drop-shadow(0 0 12px rgba(142, 177, 194, 0.8))");
 
         link
           .transition()
@@ -497,7 +497,7 @@ export function UnifiedGraph({ showBlogPosts }: UnifiedGraphProps) {
           .transition()
           .duration(150)
           .attr("r", d.radius)
-          .style("filter", "drop-shadow(0 0 4px rgba(139, 92, 246, 0.3))");
+          .style("filter", "drop-shadow(0 0 4px rgba(142, 177, 194, 0.3))");
 
         link
           .transition()

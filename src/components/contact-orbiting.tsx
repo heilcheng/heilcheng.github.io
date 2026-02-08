@@ -2,8 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { OrbitingCircles } from "@/components/magicui/orbiting-circles";
-import { Mail, Linkedin, Github } from "lucide-react";
+import { Mail, Linkedin, Github, Send, ArrowRight } from "lucide-react";
 import { DATA } from "@/data/resume";
 import Link from "next/link";
 
@@ -28,18 +27,42 @@ export const ContactOrbiting = ({ delay = 0 }: ContactOrbitingProps) => {
     },
   };
 
-  const orbitingVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
+  const iconVariants = {
+    hidden: { opacity: 0, scale: 0.5 },
+    visible: (i: number) => ({
       opacity: 1,
       scale: 1,
       transition: {
-        duration: 1,
-        delay: delay + 0.3,
+        duration: 0.5,
+        delay: delay + 0.3 + i * 0.1,
         ease: [0.25, 0.1, 0.25, 1],
       },
-    },
+    }),
   };
+
+  const contactMethods = [
+    {
+      name: "Email",
+      icon: Mail,
+      href: DATA.contact.social.email.url,
+      description: "Send me an email",
+      color: "from-primary/20 to-primary/5",
+    },
+    {
+      name: "LinkedIn",
+      icon: Linkedin,
+      href: DATA.contact.social.LinkedIn.url,
+      description: "Connect with me",
+      color: "from-primary/15 to-primary/5",
+    },
+    {
+      name: "GitHub",
+      icon: Github,
+      href: DATA.contact.social.GitHub.url,
+      description: "View my code",
+      color: "from-primary/10 to-primary/5",
+    },
+  ];
 
   return (
     <motion.section
@@ -48,80 +71,73 @@ export const ContactOrbiting = ({ delay = 0 }: ContactOrbitingProps) => {
       variants={containerVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
+      className="w-full"
     >
-      <div className="grid items-center justify-center gap-4 px-4 text-center md:px-6 w-full">
+      <div className="flex flex-col items-center text-center space-y-8">
+        {/* Header */}
         <div className="space-y-3">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-            Get in Touch.
-          </h2>
-          <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-            Want to chat? Feel free to reach out via{" "}
-            <Link
-              href={DATA.contact.social.email.url}
-              className="text-blue-500 hover:underline"
-            >
-              email
-            </Link>{" "}
-            or{" "}
-            <Link
-              href={DATA.contact.social.LinkedIn.url}
-              className="text-blue-500 hover:underline"
-            >
-              LinkedIn
-            </Link>{" "}
-            and I&apos;ll respond whenever I can.
+          <h2 className="text-2xl font-bold">Get in Touch.</h2>
+          <p className="text-muted-foreground max-w-md mx-auto">
+            Have a question or want to collaborate? I&apos;d love to hear from you.
           </p>
         </div>
 
-        {/* Orbiting Circles */}
-        <motion.div
-          variants={orbitingVariants}
-          className="relative overflow-hidden h-[500px] w-full flex items-center justify-center"
-        >
-          {/* Inner orbit - Email icons */}
-          <OrbitingCircles radius={80} duration={15}>
-            <Mail className="size-8 text-blue-600" />
-            <Mail className="size-8 text-blue-600" />
-            <Mail className="size-8 text-blue-600" />
-          </OrbitingCircles>
-          
-          {/* Outer orbit - Social icons */}
-          <OrbitingCircles radius={140} reverse duration={20}>
-            <Linkedin className="size-8 text-blue-700" />
-            <Github className="size-8 text-gray-700 dark:text-gray-300" />
-          </OrbitingCircles>
+        {/* Beautiful teal-themed contact cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-2xl">
+          {contactMethods.map((method, index) => (
+            <motion.div
+              key={method.name}
+              custom={index}
+              variants={iconVariants}
+              whileHover={{ y: -4, scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Link
+                href={method.href}
+                target={method.name !== "Email" ? "_blank" : undefined}
+                rel={method.name !== "Email" ? "noopener noreferrer" : undefined}
+                className={`group relative flex flex-col items-center gap-3 p-6 rounded-2xl bg-gradient-to-br ${method.color} border border-primary/10 hover:border-primary/30 transition-all duration-300`}
+              >
+                {/* Icon with animated background */}
+                <div className="relative">
+                  <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                  <div className="relative w-14 h-14 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <method.icon className="w-6 h-6 text-primary" />
+                  </div>
+                </div>
 
-          {/* Center content - clickable links */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="flex gap-4">
-              <Link
-                href={DATA.contact.social.email.url}
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-background border shadow-lg hover:scale-110 transition-transform duration-200"
-                title="Send Email"
-              >
-                <Mail className="size-6 text-foreground" />
+                {/* Text */}
+                <div className="space-y-1">
+                  <p className="font-semibold text-foreground">{method.name}</p>
+                  <p className="text-xs text-muted-foreground">{method.description}</p>
+                </div>
+
+                {/* Hover arrow */}
+                <ArrowRight className="absolute top-4 right-4 w-4 h-4 text-primary/0 group-hover:text-primary/60 translate-x-[-4px] group-hover:translate-x-0 transition-all duration-300" />
               </Link>
-              <Link
-                href={DATA.contact.social.LinkedIn.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-background border shadow-lg hover:scale-110 transition-transform duration-200"
-                title="Connect on LinkedIn"
-              >
-                <Linkedin className="size-6 text-foreground" />
-              </Link>
-              <Link
-                href={DATA.contact.social.GitHub.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-background border shadow-lg hover:scale-110 transition-transform duration-200"
-                title="View GitHub"
-              >
-                <Github className="size-6 text-foreground" />
-              </Link>
-            </div>
-          </div>
-        </motion.div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Subtle animated dots */}
+        <div className="flex items-center gap-2 pt-4">
+          {[...Array(3)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="w-1.5 h-1.5 rounded-full bg-primary/30"
+              animate={{
+                scale: [1, 1.3, 1],
+                opacity: [0.3, 0.7, 0.3],
+              }}
+              transition={{
+                duration: 2,
+                delay: i * 0.3,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </div>
       </div>
     </motion.section>
   );

@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
-import Image from "next/image";
 import BlurFade from "./magicui/blur-fade";
 
 interface HongKongMapProps {
@@ -74,24 +73,24 @@ const locations = {
   }
 };
 
-// Custom icon definitions
-const natureIcon = new L.Icon({
-  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41]
-});
+// Custom purple markers using SVG (unified brand color)
+const createPurpleMarkerIcon = (type: 'nature' | 'urban') => {
+  const color = type === 'nature' ? '#8eb1c2' : '#a7c8d4'; // Brand purple shades
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 36" width="24" height="36">
+      <path fill="${color}" stroke="#fff" stroke-width="1.5" d="M12 0C5.4 0 0 5.4 0 12c0 9 12 24 12 24s12-15 12-24c0-6.6-5.4-12-12-12z"/>
+      <circle fill="#fff" cx="12" cy="12" r="5"/>
+    </svg>
+  `;
 
-const urbanIcon = new L.Icon({
-  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41]
-});
+  return new L.DivIcon({
+    html: svg,
+    className: 'custom-marker',
+    iconSize: [24, 36],
+    iconAnchor: [12, 36],
+    popupAnchor: [0, -36],
+  });
+};
 
 export const HongKongMap = ({ delay = 0 }: HongKongMapProps) => {
   const [isClient, setIsClient] = useState(false);
@@ -116,10 +115,8 @@ export const HongKongMap = ({ delay = 0 }: HongKongMapProps) => {
     return (
       <BlurFade delay={delay}>
         <div className="flex justify-center">
-          <div className="bg-card border rounded-lg p-6 w-full max-w-4xl">
-            <div className="h-96 flex items-center justify-center">
-              Loading Hong Kong Map...
-            </div>
+          <div className="h-96 flex items-center justify-center w-full">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
           </div>
         </div>
       </BlurFade>
@@ -129,55 +126,41 @@ export const HongKongMap = ({ delay = 0 }: HongKongMapProps) => {
   return (
     <BlurFade delay={delay}>
       <div className="flex justify-center">
-        <div className="bg-card border rounded-lg p-6 w-full max-w-4xl">
-          <div className="flex flex-col items-center space-y-6">
-            <div className="relative w-full h-96 max-w-4xl rounded-lg overflow-hidden border">
-              <MapContainer 
-                center={[22.35, 114.15]} // Center of Hong Kong
-                zoom={10} 
-                style={{ height: '100%', width: '100%' }}
-                scrollWheelZoom={false}
-              >
-                <TileLayer
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                />
-                {Object.entries(locations).map(([key, location]) => (
-                  <Marker
-                    key={key}
-                    position={location.coordinates as [number, number]}
-                    icon={location.type === 'nature' ? natureIcon : urbanIcon}
-                  >
-                    <Popup>
-                      <span className="font-semibold">{location.name}</span>
-                      <br />
-                      {location.description}
-                    </Popup>
-                  </Marker>
-                ))}
-              </MapContainer>
+        <div className="flex flex-col items-center space-y-6 w-full">
+          <div className="relative w-full h-96 rounded-xl overflow-hidden border border-border/30 shadow-lg">
+            <MapContainer
+              center={[22.35, 114.15]} // Center of Hong Kong
+              zoom={10}
+              style={{ height: '100%', width: '100%' }}
+              scrollWheelZoom={false}
+            >
+              {/* Beautiful CartoDB Positron map style */}
+              <TileLayer
+                url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+              />
+              {Object.entries(locations).map(([key, location]) => (
+                <Marker
+                  key={key}
+                  position={location.coordinates as [number, number]}
+                  icon={createPurpleMarkerIcon(location.type as 'nature' | 'urban')}
+                >
+                  <Popup className="custom-popup">
+                    <div className="font-semibold text-primary">{location.name}</div>
+                    <div className="text-sm text-muted-foreground">{location.description}</div>
+                  </Popup>
+                </Marker>
+              ))}
+            </MapContainer>
+          </div>
+          <div className="flex items-center space-x-6 text-sm">
+            <div className="flex items-center space-x-2">
+              <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#8eb1c2' }}></div>
+              <span className="text-muted-foreground">Nature</span>
             </div>
-            <div className="flex items-center space-x-6 text-sm">
-              <div className="flex items-center space-x-2">
-                <Image 
-                  src={natureIcon.options.iconUrl} 
-                  alt="Nature" 
-                  width={16} 
-                  height={16} 
-                  className="w-4 h-auto"
-                />
-                <span>Nature</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Image 
-                  src={urbanIcon.options.iconUrl} 
-                  alt="Urban" 
-                  width={16} 
-                  height={16} 
-                  className="w-4 h-auto"
-                />
-                <span>Urban</span>
-              </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#a7c8d4' }}></div>
+              <span className="text-muted-foreground">Urban</span>
             </div>
           </div>
         </div>
@@ -187,4 +170,4 @@ export const HongKongMap = ({ delay = 0 }: HongKongMapProps) => {
 };
 
 // Make sure to export the component as default if it's the only export
-export default HongKongMap; 
+export default HongKongMap;

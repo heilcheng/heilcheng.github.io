@@ -141,7 +141,7 @@ export function HomeGraph() {
         .attr("r", (d) => d.radius)
         .style("filter", (d) => {
           const count = d.connectionCount || 0;
-          return count >= 3 ? "drop-shadow(0 0 6px rgba(139, 92, 246, 0.4))" : "none";
+          return count >= 3 ? "drop-shadow(0 0 6px rgba(142, 177, 194, 0.4))" : "none";
         });
       labels.transition().duration(150).attr("opacity", 1);
       links.transition().duration(150)
@@ -150,7 +150,7 @@ export function HomeGraph() {
       nodes.transition().duration(150)
         .attr("opacity", (d) => d.id === id ? 1 : 0.25)
         .attr("r", (d) => d.id === id ? d.radius * 1.4 : d.radius)
-        .style("filter", (d) => d.id === id ? "drop-shadow(0 0 12px rgba(139, 92, 246, 0.7))" : "none");
+        .style("filter", (d) => d.id === id ? "drop-shadow(0 0 12px rgba(142, 177, 194, 0.7))" : "none");
       labels.transition().duration(150)
         .attr("opacity", (d) => d.id === id ? 1 : 0.15);
       links.transition().duration(150)
@@ -259,7 +259,7 @@ export function HomeGraph() {
       .selectAll("line")
       .data(links)
       .join("line")
-      .attr("stroke", (d) => d.type === "content" ? "#8b5cf6" : "#a78bfa")
+      .attr("stroke", (d) => d.type === "content" ? "#8eb1c2" : "#a7c8d4")
       .attr("stroke-opacity", (d) => d.type === "content" ? 0.6 : 0.25)
       .attr("stroke-width", (d) => d.type === "content" ? 2 : 1)
       .attr("stroke-dasharray", (d) => d.type === "tag" ? "3,3" : "none");
@@ -273,14 +273,14 @@ export function HomeGraph() {
       .attr("r", (d) => d.radius)
       .attr("fill", (d) => {
         const count = d.connectionCount || 0;
-        if (count >= 4) return "#7c3aed";
-        if (count >= 2) return "#8b5cf6";
-        if (count >= 1) return "#a78bfa";
-        return "#c4b5fd";
+        if (count >= 4) return "#6a9aad";
+        if (count >= 2) return "#8eb1c2";
+        if (count >= 1) return "#a7c8d4";
+        return "#d4e5eb";
       })
       .attr("stroke", (d) => {
         const count = d.connectionCount || 0;
-        return count >= 3 ? "#6d28d9" : "transparent";
+        return count >= 3 ? "#5a8a9d" : "transparent";
       })
       .attr("stroke-width", (d) => {
         const count = d.connectionCount || 0;
@@ -289,7 +289,7 @@ export function HomeGraph() {
       .attr("class", "cursor-pointer transition-all duration-200")
       .style("filter", (d) => {
         const count = d.connectionCount || 0;
-        return count >= 3 ? "drop-shadow(0 0 6px rgba(139, 92, 246, 0.4))" : "none";
+        return count >= 3 ? "drop-shadow(0 0 6px rgba(142, 177, 194, 0.4))" : "none";
       })
       .on("mouseenter", function (event, d) {
         setHoveredNode(d);
@@ -297,7 +297,7 @@ export function HomeGraph() {
           .transition()
           .duration(150)
           .attr("r", d.radius * 1.4)
-          .style("filter", "drop-shadow(0 0 12px rgba(139, 92, 246, 0.7))");
+          .style("filter", "drop-shadow(0 0 12px rgba(142, 177, 194, 0.7))");
 
         link
           .transition()
@@ -318,7 +318,7 @@ export function HomeGraph() {
           .attr("stroke", (l) => {
             const sourceId = typeof l.source === "object" ? l.source.id : l.source;
             const targetId = typeof l.target === "object" ? l.target.id : l.target;
-            return sourceId === d.id || targetId === d.id ? "#7c3aed" : l.type === "content" ? "#8b5cf6" : "#a78bfa";
+            return sourceId === d.id || targetId === d.id ? "#6a9aad" : l.type === "content" ? "#8eb1c2" : "#a7c8d4";
           });
 
         node.transition().duration(150).attr("opacity", (n) => {
@@ -348,14 +348,14 @@ export function HomeGraph() {
           .transition()
           .duration(150)
           .attr("r", d.radius)
-          .style("filter", count >= 3 ? "drop-shadow(0 0 6px rgba(139, 92, 246, 0.4))" : "none");
+          .style("filter", count >= 3 ? "drop-shadow(0 0 6px rgba(142, 177, 194, 0.4))" : "none");
 
         link
           .transition()
           .duration(150)
           .attr("stroke-opacity", (l) => l.type === "content" ? 0.6 : 0.25)
           .attr("stroke-width", (l) => l.type === "content" ? 2 : 1)
-          .attr("stroke", (l) => l.type === "content" ? "#8b5cf6" : "#a78bfa");
+          .attr("stroke", (l) => l.type === "content" ? "#8eb1c2" : "#a7c8d4");
 
         node.transition().duration(150).attr("opacity", 1);
         labels.transition().duration(150).attr("opacity", 1);

@@ -72,31 +72,8 @@ export const DATA = {
         "Designed and deployed a fully automated CI/CD pipeline with GitHub Actions to enforce 95% unit test coverage, guaranteeing reproducible, production-ready builds for a system"
       ],
     },
-    {
-      company: "City University of Hong Kong",
-      href: "https://www.cityu.edu.hk",
-      badges: [],
-      location: "Hong Kong",
-      title: "Undergraduate Researcher",
-      logoUrl: "/cityuhk.jpg",
-      start: "September 2024",
-      end: "Present",
-      bullets: [
-        "Thesis: Hybrid ODE-Neural Network for Personalized Treatment Prediction",
-        "Engineered a multi-task deep learning model in Python and PyTorch as a computationally efficient surrogate for a complex 15-state ODE system, reducing prediction latency from hours to milliseconds",
-        "Designed the neural network (98% AUC, 91.7% accuracy) and developed an end-to-end MLOps pipeline for data generation (N=1,000), training, and validation, achieving an R² of 0.78 on regression tasks"
-      ],
-    },
   ],
   education: [
-    {
-      school: "City University of Hong Kong",
-      href: "https://www.cityu.edu.hk",
-      degree: "Bachelor of Science in Computing Mathematics (GREAT Stream), Minor in Computer Science",
-      logoUrl: "/cityuhk.jpg",
-      start: "2023",
-      end: "2027",
-    },
     {
       school: "University of California, Berkeley",
       href: "https://berkeley.edu",
@@ -104,6 +81,14 @@ export const DATA = {
       logoUrl: "/Berkeley.png",
       start: "2024",
       end: "2024",
+    },
+    {
+      school: "City University of Hong Kong",
+      href: "https://www.cityu.edu.hk",
+      degree: "Bachelor of Science in Computing Mathematics (GREAT Stream), Minor in Computer Science",
+      logoUrl: "/cityuhk.jpg",
+      start: "2023",
+      end: "2027",
     },
     {
       school: "Pearson Edexcel A-Levels",

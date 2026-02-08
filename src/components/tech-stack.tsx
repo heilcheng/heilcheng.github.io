@@ -88,8 +88,8 @@ const techCategories: TechCategory[] = [
 ];
 
 // Flatten all items for the scrolling marquee
-const allTechItems: TechItem[] = techCategories.flatMap(category => 
-  category.subcategories 
+const allTechItems: TechItem[] = techCategories.flatMap(category =>
+  category.subcategories
     ? category.subcategories.flatMap(sub => sub.items)
     : category.items || []
 );
@@ -145,10 +145,10 @@ export const TechStack = ({ delay = 0 }: TechStackProps) => {
     >
       <div className="flex flex-col items-center justify-center space-y-4 text-center">
         <div className="space-y-2">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+          <h2 className="text-2xl font-bold text-center">
             Tech Stack.
           </h2>
-          <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+          <p className="text-muted-foreground md:text-lg/relaxed max-w-md mx-auto">
             Technologies and tools I work with to build innovative solutions.
           </p>
         </div>
@@ -161,7 +161,7 @@ export const TechStack = ({ delay = 0 }: TechStackProps) => {
             {/* Subtle gradient overlays */}
             <div className="absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-background via-background/80 to-transparent" />
             <div className="absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-background via-background/80 to-transparent" />
-            
+
             {/* Floating logos */}
             <motion.div
               className="flex items-center"
@@ -182,7 +182,7 @@ export const TechStack = ({ delay = 0 }: TechStackProps) => {
               ))}
             </motion.div>
           </div>
-          
+
           {/* Icon-only Show All Button */}
           <div className="flex justify-center">
             <Button
@@ -211,7 +211,7 @@ export const TechStack = ({ delay = 0 }: TechStackProps) => {
                 <h3 className="text-2xl font-bold text-center text-foreground">
                   {category.category}
                 </h3>
-                
+
                 {category.subcategories ? (
                   <div className="space-y-8">
                     {category.subcategories.map((subcategory, subIndex) => (
@@ -251,7 +251,7 @@ export const TechStack = ({ delay = 0 }: TechStackProps) => {
               </motion.div>
             ))}
           </div>
-          
+
           {/* Icon-only Back Button */}
           <div className="flex justify-center">
             <Button

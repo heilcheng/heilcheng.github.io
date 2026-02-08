@@ -13,9 +13,13 @@ export function BookCard({
 }: Props) {
   return (
     <li className="relative ml-10 py-4">
-      <div className="absolute -left-16 top-2 flex items-center justify-center bg-white rounded-full">
-        <Avatar className="border size-12 m-auto">
-          <AvatarFallback className="text-xs font-bold">{number}</AvatarFallback>
+      <div className="absolute -left-16 top-2 flex items-center justify-center">
+        <Avatar className="border-2 border-primary/30 size-12 m-auto shadow-md">
+          <AvatarFallback
+            className="text-sm font-bold bg-gradient-to-br from-primary/20 to-primary/10 text-primary"
+          >
+            {number}
+          </AvatarFallback>
         </Avatar>
       </div>
       <div className="flex flex-1 flex-col justify-start gap-1">
@@ -24,4 +28,4 @@ export function BookCard({
       </div>
     </li>
   );
-} 
+}

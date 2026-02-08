@@ -27,6 +27,17 @@ import { DATA } from "@/data/resume";
 
 const BLUR_FADE_DELAY = 0.04;
 
+// Glassmorphism Bento Card Component
+function GlassCard({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+  return (
+    <BlurFade delay={delay}>
+      <div className={`glass-card p-6 md:p-8 ${className}`}>
+        {children}
+      </div>
+    </BlurFade>
+  );
+}
+
 export default function Page() {
   const [aboutExpanded, setAboutExpanded] = useState(false);
   const [expandedBooks, setExpandedBooks] = useState<Record<string, boolean>>({});
@@ -42,86 +53,98 @@ export default function Page() {
   const moreProjects = [DATA.projects[0], DATA.projects[1]];
 
   return (
-    <main className="flex flex-col min-h-[100dvh] py-section-md">
-      <section id="hero" className="mb-section-lg">
-        <div className="w-full space-y-content-lg px-4 md:px-0">
-          <div className="flex flex-col md:flex-row gap-6 md:gap-8 justify-between items-center md:items-start">
-            {/* Avatar - shows first on mobile, right on desktop */}
-            <BlurFade delay={BLUR_FADE_DELAY * 2} className="md:order-2">
-              <Avatar className="size-28 border">
-                <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
-                <AvatarFallback>{DATA.initials}</AvatarFallback>
-              </Avatar>
-            </BlurFade>
-
-            {/* Text content - shows second on mobile, left on desktop */}
-            <div className="flex-col flex flex-1 space-y-3 items-center md:items-start text-center md:text-left md:order-1 w-full">
-              <BlurFadeText
-                delay={BLUR_FADE_DELAY * 3}
-                className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none w-full"
-                yOffset={8}
-                text={`Hi, I'm ${DATA.name.split(" ")[0]}.`}
-              />
-              <BlurFade delay={BLUR_FADE_DELAY * 4}>
-                <p className="text-sm text-muted-foreground md:text-base">
-                  I&apos;m Hongkongese. In Cantonese, I&apos;m Cheng Hei Lam (鄭曦琳).
-                  <br />
-                  IPA: /tsʰɛŋ hei lɐm/
-                </p>
+    <main className="flex flex-col min-h-[100dvh] py-section-lg space-y-6">
+      {/* Hero Section - Apple-style elegant design */}
+      <section id="hero">
+        <GlassCard delay={BLUR_FADE_DELAY} className="hero-glass overflow-hidden">
+          <div className="w-full py-8 md:py-12">
+            <div className="flex flex-col items-center text-center space-y-8">
+              {/* Avatar with elegant ring */}
+              <BlurFade delay={BLUR_FADE_DELAY * 2}>
+                <div className="relative">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-primary/40 to-primary/20 rounded-full blur-md"></div>
+                  <Avatar className="relative size-28 md:size-32 border-2 border-white/60 shadow-2xl">
+                    <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
+                    <AvatarFallback>{DATA.initials}</AvatarFallback>
+                  </Avatar>
+                </div>
               </BlurFade>
+
+              {/* Main heading - Apple style large title */}
+              <div className="space-y-4 max-w-3xl">
+                <BlurFadeText
+                  delay={BLUR_FADE_DELAY * 3}
+                  className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight bg-gradient-to-b from-foreground via-foreground to-foreground/60 bg-clip-text"
+                  yOffset={8}
+                  text={`Hi, I'm ${DATA.name.split(" ")[0]}.`}
+                />
+
+                <BlurFade delay={BLUR_FADE_DELAY * 4}>
+                  <p className="text-sm md:text-base text-muted-foreground/70 font-light tracking-wide">
+                    鄭曦琳 · Cheng Hei Lam · /tsʰɛŋ hei lɐm/
+                  </p>
+                </BlurFade>
+              </div>
+
+              {/* Description - clean and elegant */}
               <BlurFade delay={BLUR_FADE_DELAY * 5}>
-                <p className="max-w-[600px] text-muted-foreground text-base md:text-xl">
+                <p className="max-w-xl text-lg md:text-xl text-muted-foreground leading-relaxed font-light">
                   {DATA.description}
                 </p>
               </BlurFade>
+
+              {/* CTA - minimal and elegant */}
               <BlurFade delay={BLUR_FADE_DELAY * 6}>
-                <p className="text-muted-foreground text-base md:text-xl">
+                <p className="text-lg md:text-xl text-muted-foreground">
                   Currently building at{" "}
                   <a
                     href="https://coglixlabs.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-medium text-primary hover:text-primary/80 underline decoration-primary/40 underline-offset-2 hover:decoration-primary/60 transition-all duration-200"
+                    className="font-medium text-primary hover:text-primary/80 underline decoration-primary/30 underline-offset-4 hover:decoration-primary/60 transition-all duration-300"
                   >
                     Coglix Labs
                   </a>
-                  .
                 </p>
               </BlurFade>
             </div>
           </div>
-        </div>
+        </GlassCard>
       </section>
 
-      <BlurFade delay={BLUR_FADE_DELAY * 7}>
-        <div className="relative">
-          {showUnifiedGraph ? (
-            <UnifiedGraph showBlogPosts={true} />
-          ) : (
-            <HomeGraph />
-          )}
-          <button
-            onClick={() => setShowUnifiedGraph(!showUnifiedGraph)}
-            className="absolute bottom-4 right-4 z-30 flex items-center gap-2 px-3 py-2 text-xs font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-white/95 hover:bg-gray-50 dark:hover:bg-white border border-gray-200 dark:border-white/20 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg backdrop-blur-sm"
-          >
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-            <span className="whitespace-nowrap">
-              {showUnifiedGraph ? "Sections Only" : "With Blog Posts"}
-            </span>
-          </button>
-        </div>
-      </BlurFade>
+      {/* Navigation Graph Section */}
+      <section id="graph">
+        <GlassCard delay={BLUR_FADE_DELAY * 7} className="p-4 md:p-6">
+          <div className="relative">
+            {showUnifiedGraph ? (
+              <UnifiedGraph showBlogPosts={true} />
+            ) : (
+              <HomeGraph />
+            )}
+            <button
+              onClick={() => setShowUnifiedGraph(!showUnifiedGraph)}
+              className="absolute bottom-4 right-4 z-30 flex items-center gap-2 px-3 py-2 text-xs font-medium bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 rounded-lg hover:scale-105 transition-all duration-200 backdrop-blur-sm"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              <span className="whitespace-nowrap">
+                {showUnifiedGraph ? "Sections Only" : "With Blog Posts"}
+              </span>
+            </button>
+          </div>
+        </GlassCard>
+      </section>
 
-      <section id="about" className="mb-section-lg">
-        <div className="space-y-content-md">
-          <BlurFade delay={BLUR_FADE_DELAY * 10}>
-            <div className="flex items-center gap-3">
-              <h2 className="text-xl font-bold">About</h2>
+      {/* About Section */}
+      <section id="about">
+        <GlassCard delay={BLUR_FADE_DELAY * 10}>
+          <div className="space-y-content-md">
+            <div className="flex flex-col items-center gap-3">
+              <h2 className="text-2xl font-bold text-center">About.</h2>
               <button
                 onClick={() => setAboutExpanded(!aboutExpanded)}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground bg-muted/50 hover:bg-muted rounded-full transition-all duration-200"
+                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground bg-white/50 dark:bg-white/10 hover:bg-white/70 dark:hover:bg-white/20 rounded-full transition-all duration-200 backdrop-blur-sm"
               >
                 {aboutExpanded ? "Hide" : "Read more"}
                 <ChevronDown
@@ -129,307 +152,303 @@ export default function Page() {
                 />
               </button>
             </div>
-          </BlurFade>
 
-          <AnimatePresence>
-            {aboutExpanded && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-                className="overflow-hidden"
-              >
-                <div className="space-y-content-sm">
-                  <p className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
-                    I&apos;m a Homo sapiens born and raised in Hong Kong. I also spent a year studying in the UK and semesters in the US and France, experiences that opened my mind and shaped how I see the world.
-                  </p>
-                  <p className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
-                    Before university, I was that kid obsessed with biology and completely hooked on the Olympiad. I loved exploring the mysteries of life. But after countless hours pipetting in the lab, I started to feel burnt out. I realized I loved biology, just not the endless wet lab work.
-                  </p>
-                  <p className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
-                    At the same time, I discovered the beauty and speed of simulations, where you can explore complex systems without spilling a single drop. One day, I had a lightbulb moment: &ldquo;What if I could use math and code to solve big biology questions instead?&rdquo; That idea completely changed my path.
-                  </p>
-                  <p className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
-                    And so, here I am, merging my love for biology with the power of math and computation.
-                  </p>
-                  <p className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
-                    When I&apos;m not coding or solving equations, you&apos;ll find me kayaking, playing tennis, or on a mission to hunt down the best ramen and handmade pasta in Hong Kong (I might have tried them all by now). And when it comes to boba, it&apos;s always &ldquo;No.1&rdquo; at Comebuytea.
-                  </p>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </section>
-
-      <section id="ethics" className="mb-section-lg">
-        <div className="space-y-content-md">
-          <EthicsQuote delay={BLUR_FADE_DELAY * 15.5} />
-        </div>
-      </section>
-
-      <section id="work" className="mb-section-lg">
-        <div className="space-y-4">
-          <BlurFade delay={BLUR_FADE_DELAY * 17}>
-            <h2 className="text-xl font-bold">Cool Places I Worked At</h2>
-          </BlurFade>
-          <div className="divide-y divide-border/30">
-            {DATA.technicalExperience.map((work, id) => (
-              <BlurFade key={work.company} delay={BLUR_FADE_DELAY * 18 + id * 0.02}>
-                <TimelineItem
-                  logoUrl={work.logoUrl}
-                  altText={work.company}
-                  title={work.company}
-                  subtitle={work.title}
-                  href={work.href}
-                  badges={work.badges}
-                  period={`${work.start} - ${work.end ?? "Present"}`}
-                  bullets={work.bullets}
-                  isLast={id === DATA.technicalExperience.length - 1}
-                />
-              </BlurFade>
-            ))}
+            <AnimatePresence>
+              {aboutExpanded && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                  className="overflow-hidden"
+                >
+                  <div className="space-y-content-sm pt-2">
+                    <p className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert leading-relaxed">
+                      I&apos;m a Homo sapiens born and raised in Hong Kong. I also spent a year studying in the UK and semesters in the US and France, experiences that opened my mind and shaped how I see the world.
+                    </p>
+                    <p className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert leading-relaxed">
+                      Before university, I was that kid obsessed with biology and completely hooked on the Olympiad. I loved exploring the mysteries of life. But after countless hours pipetting in the lab, I started to feel burnt out. I realized I loved biology, just not the endless wet lab work.
+                    </p>
+                    <p className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert leading-relaxed">
+                      At the same time, I discovered the beauty and speed of simulations, where you can explore complex systems without spilling a single drop. One day, I had a lightbulb moment: &ldquo;What if I could use math and code to solve big biology questions instead?&rdquo; That idea completely changed my path.
+                    </p>
+                    <p className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert leading-relaxed">
+                      And so, here I am, merging my love for biology with the power of math and computation.
+                    </p>
+                    <p className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert leading-relaxed">
+                      When I&apos;m not coding or solving equations, you&apos;ll find me kayaking, playing tennis, or on a mission to hunt down the best ramen and handmade pasta in Hong Kong (I might have tried them all by now). And when it comes to boba, it&apos;s always &ldquo;No.1&rdquo; at Comebuytea.
+                    </p>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
-        </div>
+        </GlassCard>
       </section>
 
-      <section id="education" className="mb-section-lg">
-        <div className="space-y-4">
-          <BlurFade delay={BLUR_FADE_DELAY * 19}>
-            <h2 className="text-xl font-bold">Education</h2>
-          </BlurFade>
-          <div className="divide-y divide-border/30">
-            {DATA.education.map((education, id) => (
-              <BlurFade key={education.school} delay={BLUR_FADE_DELAY * 20 + id * 0.02}>
-                <TimelineItem
-                  logoUrl={education.logoUrl}
-                  altText={education.school}
-                  title={education.school}
-                  subtitle={education.degree}
-                  href={education.href}
-                  period={`${education.start} - ${education.end}`}
-                  isLast={id === DATA.education.length - 1}
-                />
-              </BlurFade>
-            ))}
+      {/* Ethics Quote Section */}
+      <section id="ethics">
+        <GlassCard delay={BLUR_FADE_DELAY * 15.5} className="p-4 md:p-6">
+          <EthicsQuote delay={0} />
+        </GlassCard>
+      </section>
+
+      {/* Work Experience Section */}
+      <section id="work">
+        <GlassCard delay={BLUR_FADE_DELAY * 17}>
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold text-center">Cool Places I Worked At.</h2>
+            <div className="divide-y divide-border/20">
+              {DATA.technicalExperience.map((work, id) => (
+                <BlurFade key={work.company} delay={BLUR_FADE_DELAY * 18 + id * 0.02}>
+                  <TimelineItem
+                    logoUrl={work.logoUrl}
+                    altText={work.company}
+                    title={work.company}
+                    subtitle={work.title}
+                    href={work.href}
+                    badges={work.badges}
+                    period={`${work.start} - ${work.end ?? "Present"}`}
+                    bullets={work.bullets}
+                    isLast={id === DATA.technicalExperience.length - 1}
+                  />
+                </BlurFade>
+              ))}
+            </div>
           </div>
-        </div>
+        </GlassCard>
       </section>
 
-      <section id="tech-stack" className="mb-section-lg">
-        <TechStack delay={BLUR_FADE_DELAY * 21} />
+      {/* Education Section */}
+      <section id="education">
+        <GlassCard delay={BLUR_FADE_DELAY * 19}>
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold text-center">Education.</h2>
+            <div className="divide-y divide-border/20">
+              {DATA.education.map((education, id) => (
+                <BlurFade key={education.school} delay={BLUR_FADE_DELAY * 20 + id * 0.02}>
+                  <TimelineItem
+                    logoUrl={education.logoUrl}
+                    altText={education.school}
+                    title={education.school}
+                    subtitle={education.degree}
+                    href={education.href}
+                    period={`${education.start} - ${education.end}`}
+                    isLast={id === DATA.education.length - 1}
+                  />
+                </BlurFade>
+              ))}
+            </div>
+          </div>
+        </GlassCard>
       </section>
 
-      <section id="projects" className="mb-section-lg">
-        <div className="space-y-content-lg">
-          <BlurFade delay={BLUR_FADE_DELAY * 22}>
+      {/* Tech Stack Section */}
+      <section id="tech-stack">
+        <GlassCard delay={BLUR_FADE_DELAY * 21} className="p-4 md:p-6">
+          <TechStack delay={0} />
+        </GlassCard>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects">
+        <GlassCard delay={BLUR_FADE_DELAY * 22}>
+          <div className="space-y-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+              <div className="space-y-3">
+                <h2 className="text-2xl font-bold text-center">
                   Check out my latest work.
                 </h2>
-                <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                <p className="text-muted-foreground md:text-lg/relaxed max-w-lg mx-auto">
                   I&apos;ve worked on a variety of projects, from simple
-                  websites to complex web applications. Here are a few of my
-                  favorites.
+                  websites to complex web applications.
                 </p>
               </div>
             </div>
-          </BlurFade>
 
-          {/* Featured Projects (Craftscape HK & Truth or Dare) */}
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto">
-            {featuredProjects.map((project, id) => (
-              <BlurFade
-                key={project.title}
-                delay={BLUR_FADE_DELAY * 23 + id * 0.05}
-              >
-                <ProjectCard
-                  href={project.href}
-                  title={project.title}
-                  description={project.description}
-                  dates={project.dates}
-                  tags={project.technologies}
-                  image={project.image}
-                  video={project.video}
-                  links={project.links}
-                />
-              </BlurFade>
-            ))}
-          </div>
-
-          {/* Expand button */}
-          <BlurFade delay={BLUR_FADE_DELAY * 24}>
+            {/* Expand button */}
             <div className="flex justify-center">
               <button
                 onClick={() => setProjectsExpanded(!projectsExpanded)}
-                className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground bg-muted/50 hover:bg-muted rounded-full transition-all duration-200"
+                className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-primary bg-primary/10 hover:bg-primary/20 border border-primary/20 rounded-full transition-all duration-200 backdrop-blur-sm"
               >
-                {projectsExpanded ? "Show less" : "Show more projects"}
+                {projectsExpanded ? "Hide projects" : "View projects"}
                 <ChevronDown
                   className={`w-4 h-4 transition-transform duration-200 ${projectsExpanded ? "rotate-180" : ""}`}
                 />
               </button>
             </div>
-          </BlurFade>
 
-          {/* More Projects (MEQ-Bench & Gemma) */}
-          <AnimatePresence>
-            {projectsExpanded && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-                className="overflow-hidden"
-              >
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto">
-                  {moreProjects.map((project, id) => (
-                    <BlurFade
-                      key={project.title}
-                      delay={0.05 + id * 0.05}
-                    >
-                      <ProjectCard
-                        href={project.href}
-                        title={project.title}
-                        description={project.description}
-                        dates={project.dates}
-                        tags={project.technologies}
-                        image={project.image}
-                        video={project.video}
-                        links={project.links}
-                      />
-                    </BlurFade>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </section>
-
-      <section id="github" className="mb-section-lg">
-        <GitHubContributions username="heilcheng" delay={BLUR_FADE_DELAY * 24} />
-      </section>
-
-      <section id="books" className="mb-section-lg">
-        <div className="space-y-content-lg">
-          <BlurFade delay={BLUR_FADE_DELAY * 25}>
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                  Commonplace Book.
-                </h2>
-                <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  A personal collection of readings and ideas that shape my worldview.
-                </p>
-              </div>
-            </div>
-          </BlurFade>
-          <BlurFade delay={BLUR_FADE_DELAY * 26}>
-            <div className="space-y-4">
-              {DATA.books.map((themeGroup, themeId) => (
-                <div key={themeGroup.theme}>
-                  <BlurFade delay={BLUR_FADE_DELAY * 27 + themeId * 0.1}>
-                    <button
-                      onClick={() => toggleBookCategory(themeGroup.theme)}
-                      className="flex items-center gap-2 w-full text-left group"
-                    >
-                      <h3 className="text-lg font-semibold text-muted-foreground group-hover:text-foreground transition-colors">
-                        {themeGroup.theme}
-                      </h3>
-                      <span className="flex items-center gap-1.5 px-2 py-1 text-xs font-medium text-muted-foreground group-hover:text-foreground bg-muted/50 group-hover:bg-muted rounded-full transition-all duration-200">
-                        {expandedBooks[themeGroup.theme] ? "Hide" : `${themeGroup.books.length} ${themeGroup.books.length === 1 ? "book" : "books"}`}
-                        <ChevronDown
-                          className={`w-3 h-3 transition-transform duration-200 ${expandedBooks[themeGroup.theme] ? "rotate-180" : ""}`}
-                        />
-                      </span>
-                    </button>
-                  </BlurFade>
-                  <AnimatePresence>
-                    {expandedBooks[themeGroup.theme] && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-                        className="overflow-hidden"
+            {/* All Projects - Hidden by default */}
+            <AnimatePresence>
+              {projectsExpanded && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                  className="overflow-hidden"
+                >
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    {[...featuredProjects, ...moreProjects].map((project, id) => (
+                      <BlurFade
+                        key={project.title}
+                        delay={0.05 + id * 0.05}
                       >
-                        <ul className="mt-3 mb-4 ml-4 divide-y divide-dashed border-l">
-                          {themeGroup.books.map((book) => (
-                            <BookCard
-                              key={book.title + book.author}
-                              title={book.title}
-                              author={book.author}
-                              number={book.number}
-                            />
-                          ))}
-                        </ul>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
+                        <ProjectCard
+                          href={project.href}
+                          title={project.title}
+                          description={project.description}
+                          dates={project.dates}
+                          tags={project.technologies}
+                          image={project.image}
+                          video={project.video}
+                          links={project.links}
+                        />
+                      </BlurFade>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </GlassCard>
+      </section>
+
+      {/* GitHub Contributions Section */}
+      <section id="github">
+        <GlassCard delay={BLUR_FADE_DELAY * 24} className="p-4 md:p-6">
+          <GitHubContributions username="heilcheng" delay={0} />
+        </GlassCard>
+      </section>
+
+      {/* Books Section - Compact horizontal layout */}
+      <section id="books">
+        <GlassCard delay={BLUR_FADE_DELAY * 25}>
+          <div className="space-y-6">
+            <div className="text-center">
+              <h2 className="text-2xl font-bold">Commonplace Book.</h2>
+              <p className="text-sm text-muted-foreground mt-2">
+                Readings that shape my worldview
+              </p>
+            </div>
+
+            {/* Compact horizontal scroll of book categories */}
+            <div className="flex flex-wrap gap-2 justify-center">
+              {DATA.books.map((themeGroup, themeId) => (
+                <BlurFade key={themeGroup.theme} delay={BLUR_FADE_DELAY * 27 + themeId * 0.05}>
+                  <button
+                    onClick={() => toggleBookCategory(themeGroup.theme)}
+                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-full transition-all duration-200 ${expandedBooks[themeGroup.theme]
+                      ? "bg-primary/20 text-primary border border-primary/30"
+                      : "bg-white/50 dark:bg-white/10 text-muted-foreground hover:text-foreground hover:bg-white/70 dark:hover:bg-white/20 border border-transparent"
+                      }`}
+                  >
+                    {themeGroup.theme}
+                    <span className="text-xs opacity-70">({themeGroup.books.length})</span>
+                  </button>
+                </BlurFade>
               ))}
             </div>
-          </BlurFade>
-        </div>
+
+            {/* Expanded books list - compact grid */}
+            <AnimatePresence>
+              {Object.entries(expandedBooks).some(([, isExpanded]) => isExpanded) && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                  className="overflow-hidden"
+                >
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-4">
+                    {DATA.books
+                      .filter((themeGroup) => expandedBooks[themeGroup.theme])
+                      .flatMap((themeGroup) => themeGroup.books)
+                      .map((book, index) => (
+                        <motion.div
+                          key={book.title}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: index * 0.03 }}
+                          className="flex items-center gap-3 p-3 rounded-xl bg-white/30 dark:bg-white/5 hover:bg-white/50 dark:hover:bg-white/10 transition-colors"
+                        >
+                          <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-xs font-bold text-primary">
+                            {book.number}
+                          </span>
+                          <div className="min-w-0 flex-1">
+                            <p className="text-sm font-medium truncate">{book.title}</p>
+                            <p className="text-xs text-muted-foreground truncate">{book.author}</p>
+                          </div>
+                        </motion.div>
+                      ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </GlassCard>
       </section>
 
-      <section id="hong-kong" className="mb-section-lg">
-        <div className="space-y-content-lg">
-          <BlurFade delay={BLUR_FADE_DELAY * 29}>
+      {/* Hong Kong Map Section */}
+      <section id="hong-kong">
+        <GlassCard delay={BLUR_FADE_DELAY * 29}>
+          <div className="space-y-content-lg">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+              <div className="space-y-3">
+                <h2 className="text-2xl font-bold text-center">
                   Best parts of Hong Kong.
                 </h2>
-                <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                <p className="text-muted-foreground md:text-lg/relaxed max-w-md mx-auto">
                   A collection of my favorite spots and activities in the city I call home.
                 </p>
               </div>
             </div>
-          </BlurFade>
-          <HongKongMap delay={BLUR_FADE_DELAY * 30} />
-        </div>
+            <HongKongMap delay={0} />
+          </div>
+        </GlassCard>
       </section>
 
-      <section id="world" className="mb-section-lg">
-        <div className="space-y-content-lg">
-          <BlurFade delay={BLUR_FADE_DELAY * 31}>
+      {/* World Map Section */}
+      <section id="world">
+        <GlassCard delay={BLUR_FADE_DELAY * 31}>
+          <div className="space-y-content-lg">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+              <div className="space-y-3">
+                <h2 className="text-2xl font-bold text-center">
                   World Map.
                 </h2>
-                <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                <p className="text-muted-foreground md:text-lg/relaxed max-w-md mx-auto">
                   Countries I&apos;ve visited and want to visit.
                 </p>
               </div>
             </div>
-          </BlurFade>
-          <WorldMap delay={BLUR_FADE_DELAY * 32} />
-        </div>
+            <WorldMap delay={0} />
+          </div>
+        </GlassCard>
       </section>
 
-      {/* Duolingo section at the end */}
-      <section id="duolingo" className="min-h-screen flex flex-col items-center justify-center mb-section-lg bg-white dark:bg-background">
-        <BlurFade delay={BLUR_FADE_DELAY * 34}>
+      {/* Duolingo section */}
+      <section id="duolingo">
+        <GlassCard delay={BLUR_FADE_DELAY * 34} className="min-h-[60vh] flex flex-col items-center justify-center">
           <h2 className="text-4xl md:text-6xl font-bold text-[#58cc02] mb-8 text-center animate-pulse">
             Spanish or vanish?
           </h2>
-        </BlurFade>
-        <BlurFade delay={BLUR_FADE_DELAY * 35}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="https://i.pinimg.com/originals/98/59/12/98591272861e66a02eecf5dae0450c73.gif"
             alt="Duolingo"
-            className="max-w-[300px] md:max-w-[500px] w-full"
+            className="max-w-[300px] md:max-w-[400px] w-full"
           />
-        </BlurFade>
+        </GlassCard>
       </section>
 
-      <ContactOrbiting delay={BLUR_FADE_DELAY * 36} />
+      {/* Contact Section */}
+      <section id="contact">
+        <GlassCard delay={BLUR_FADE_DELAY * 36} className="p-4 md:p-6">
+          <ContactOrbiting delay={0} />
+        </GlassCard>
+      </section>
     </main>
   );
 }

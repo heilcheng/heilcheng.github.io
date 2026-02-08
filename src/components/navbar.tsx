@@ -22,8 +22,8 @@ export default function Navbar() {
 
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-0 z-30 mx-auto mb-4 flex origin-bottom h-full max-h-14">
-      <div className="fixed bottom-0 inset-x-0 h-16 w-full bg-background to-transparent backdrop-blur-lg [-webkit-mask-image:linear-gradient(to_top,black,transparent)] dark:bg-background"></div>
-      <Dock className="z-50 pointer-events-auto relative mx-auto flex min-h-full h-full items-center px-1 bg-background [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)] transform-gpu dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset] ">
+      <div className="fixed bottom-0 inset-x-0 h-16 w-full bg-gradient-to-t from-background/80 to-transparent backdrop-blur-md"></div>
+      <Dock className="glass-navbar z-50 pointer-events-auto relative mx-auto flex min-h-full h-full items-center px-2 rounded-2xl transform-gpu">
         {DATA.navbar.map((item) => (
           <DockIcon key={item.href}>
             <Tooltip>
@@ -32,19 +32,19 @@ export default function Navbar() {
                   href={item.href}
                   className={cn(
                     buttonVariants({ variant: "ghost", size: "icon" }),
-                    "size-12"
+                    "size-12 rounded-xl hover:bg-white/50 dark:hover:bg-white/10 transition-all duration-200"
                   )}
                 >
                   <item.icon className="size-4" />
                 </Link>
               </TooltipTrigger>
-              <TooltipContent>
+              <TooltipContent className="glass-card border-none">
                 <p>{item.label}</p>
               </TooltipContent>
             </Tooltip>
           </DockIcon>
         ))}
-        <Separator orientation="vertical" className="h-full" />
+        <Separator orientation="vertical" className="h-full opacity-30" />
         {Object.entries(DATA.contact.social)
           .filter(([_, social]) => social.navbar)
           .map(([name, social]) => (
@@ -55,19 +55,19 @@ export default function Navbar() {
                     href={social.url}
                     className={cn(
                       buttonVariants({ variant: "ghost", size: "icon" }),
-                      "size-12"
+                      "size-12 rounded-xl hover:bg-white/50 dark:hover:bg-white/10 transition-all duration-200"
                     )}
                   >
                     <social.icon className="size-4" />
                   </Link>
                 </TooltipTrigger>
-                <TooltipContent>
+                <TooltipContent className="glass-card border-none">
                   <p>{name}</p>
                 </TooltipContent>
               </Tooltip>
             </DockIcon>
           ))}
-        <Separator orientation="vertical" className="h-full py-2" />
+        <Separator orientation="vertical" className="h-full py-2 opacity-30" />
         <DockIcon>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -77,14 +77,16 @@ export default function Navbar() {
                 onClick={() => setIsAquariumActive(!isAquariumActive)}
                 className={cn(
                   buttonVariants({ variant: "ghost", size: "icon" }),
-                  "size-12",
-                  isAquariumActive && "bg-blue-100 dark:bg-blue-900"
+                  "size-12 rounded-xl transition-all duration-200",
+                  isAquariumActive
+                    ? "bg-blue-400/30 dark:bg-blue-500/30 shadow-lg shadow-blue-400/20"
+                    : "hover:bg-white/50 dark:hover:bg-white/10"
                 )}
               >
                 <Fish className="size-4" />
               </motion.button>
             </TooltipTrigger>
-            <TooltipContent>
+            <TooltipContent className="glass-card border-none">
               <p>{isAquariumActive ? "Hide Aquarium" : "Show Aquarium"}</p>
             </TooltipContent>
           </Tooltip>
@@ -94,13 +96,13 @@ export default function Navbar() {
             <TooltipTrigger asChild>
               <ModeToggle />
             </TooltipTrigger>
-            <TooltipContent>
+            <TooltipContent className="glass-card border-none">
               <p>Theme</p>
             </TooltipContent>
           </Tooltip>
         </DockIcon>
       </Dock>
-      
+
       {/* Aquarium Component */}
       <Aquarium isActive={isAquariumActive} />
     </div>

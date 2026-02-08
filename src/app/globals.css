@@ -3,85 +3,266 @@
 @tailwind utilities;
 
 @layer base {
-    :root {
-      --background: 0 0% 100%;
-      --foreground: 210 11.1% 3.53%;
+  :root {
+    --background: 220 20% 97%;
+    --foreground: 210 11.1% 3.53%;
 
-      --card: 0 0% 100%;
-      --card-foreground: 210 11.1% 3.53%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 11.1% 3.53%;
 
-      --popover: 0 0% 100%;
-      --popover-foreground: 210 11.1% 3.53%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 11.1% 3.53%;
 
-      --primary: 0 0% 9%;
-      --primary-foreground: 0 0% 98%;
+    --primary: 194 32% 66%;
+    --primary-foreground: 0 0% 98%;
 
-      --secondary: 0 0% 96.1%;
-      --secondary-foreground: 0 0% 9%;
+    --secondary: 220 15% 92%;
+    --secondary-foreground: 0 0% 9%;
 
-      --muted: 0 0% 96.1%;
-      --muted-foreground: 0 0% 45.1%;
+    --muted: 220 15% 94%;
+    --muted-foreground: 220 10% 45%;
 
-      --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
+    --accent: 194 32% 66%;
+    --accent-foreground: 0 0% 98%;
 
-      --destructive: 0 84.2% 60.2%;
-      --destructive-foreground: 0 0% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
 
-      --border: 0 0% 89.8%;
-      --input: 0 0% 89.8%;
-      --ring: 0 0% 3.9%;
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 194 32% 66%;
 
-      --radius: 0.5rem;
-    }
+    --radius: 1rem;
 
-    .dark {
-      --background: 210 11.1% 3.53%;
-      --foreground: 0 0% 98%;
+    /* Unified brand color - Teal */
+    --brand-color: 142, 177, 194;
+    --brand-color-hex: #8eb1c2;
 
-      --card: 210 11.1% 3.53%;
-      --card-foreground: 0 0% 98%;
+    /* Glassmorphism custom properties - MORE TRANSPARENT */
+    --glass-bg: rgba(255, 255, 255, 0.45);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+    --glass-blur: 24px;
 
-      --popover: 210 11.1% 3.53%;
-      --popover-foreground: 0 0% 98%;
-
-      --primary: 0 0% 98%;
-      --primary-foreground: 0 0% 9%;
-
-      --secondary: 0 0% 14.9%;
-      --secondary-foreground: 0 0% 98%;
-
-      --muted: 0 0% 14.9%;
-      --muted-foreground: 0 0% 63.9%;
-
-      --accent: 0 0% 14.9%;
-      --accent-foreground: 0 0% 98%;
-
-      --destructive: 0 62.8% 30.6%;
-      --destructive-foreground: 0 0% 98%;
-
-      --border: 0 0% 14.9%;
-      --input: 0 0% 14.9%;
-      --ring: 0 0% 83.1%;
-    }
-  .theme {
-        --animate-orbit: orbit calc(var(--duration)*1s) linear infinite;
-    }
+    /* Ambient gradient colors - using brand teal */
+    --gradient-1: 180, 220, 240;
+    --gradient-2: 142, 177, 194;
+    --gradient-3: 200, 230, 255;
+    --gradient-4: 160, 200, 220;
   }
 
-  @layer base {
+  .dark {
+    --background: 220 15% 8%;
+    --foreground: 0 0% 98%;
+
+    --card: 220 15% 12%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 220 15% 12%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 194 35% 75%;
+    --primary-foreground: 0 0% 9%;
+
+    --secondary: 220 15% 18%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 220 15% 18%;
+    --muted-foreground: 220 10% 60%;
+
+    --accent: 194 35% 75%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 15% 20%;
+    --input: 220 15% 20%;
+    --ring: 194 35% 75%;
+
+    /* Brand teal for dark mode */
+    --brand-color: 160, 200, 220;
+    --brand-color-hex: #a0c8dc;
+
+    /* Dark mode glassmorphism - MORE TRANSPARENT */
+    --glass-bg: rgba(30, 35, 50, 0.55);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+
+    /* Dark mode ambient gradient colors - using brand teal */
+    --gradient-1: 142, 177, 194;
+    --gradient-2: 100, 150, 180;
+    --gradient-3: 80, 140, 180;
+    --gradient-4: 120, 160, 180;
+  }
+
+  .theme {
+    --animate-orbit: orbit calc(var(--duration)*1s) linear infinite;
+  }
+}
+
+@layer base {
   html {
     @apply scroll-smooth;
   }
+
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "ss02", "cv01";
+  }
+}
+
+@layer components {
+
+  /* Glassmorphism card component */
+  .glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    box-shadow: var(--glass-shadow);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glass-card:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+  }
+
+  .dark .glass-card:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Glassmorphism navbar - MORE TRANSPARENT / Modern */
+  .glass-navbar {
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+  }
+
+  .dark .glass-navbar {
+    background: rgba(30, 35, 50, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Bento grid layout */
+  .bento-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  /* Ambient background */
+  .ambient-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    background: hsl(var(--background));
+  }
+
+  .ambient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.5;
+    animation: float 20s ease-in-out infinite;
+  }
+
+  .ambient-orb-1 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(var(--gradient-1), 0.4) 0%, transparent 70%);
+    top: -200px;
+    left: -100px;
+    animation-delay: 0s;
+  }
+
+  .ambient-orb-2 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(var(--gradient-2), 0.4) 0%, transparent 70%);
+    top: 30%;
+    right: -150px;
+    animation-delay: -5s;
+  }
+
+  .ambient-orb-3 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(var(--gradient-3), 0.35) 0%, transparent 70%);
+    bottom: 10%;
+    left: 20%;
+    animation-delay: -10s;
+  }
+
+  .ambient-orb-4 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(var(--gradient-4), 0.35) 0%, transparent 70%);
+    top: 50%;
+    left: 60%;
+    animation-delay: -15s;
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+
+    25% {
+      transform: translate(30px, -30px) scale(1.05);
+    }
+
+    50% {
+      transform: translate(-20px, 20px) scale(0.95);
+    }
+
+    75% {
+      transform: translate(-30px, -20px) scale(1.02);
+    }
+  }
+
+  /* Section bento card */
+  .section-bento {
+    @apply glass-card p-6 md:p-8;
+  }
+
+  /* Hero section special styling */
+  .hero-glass {
+    background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(255, 255, 255, 0.7) 100%);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+
+  .dark .hero-glass {
+    background: linear-gradient(135deg,
+        rgba(40, 45, 60, 0.9) 0%,
+        rgba(30, 35, 50, 0.75) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
 }
 
 @layer utilities {
+
   /* Consistent section spacing utilities */
   .section-spacing {
     @apply mb-section-lg;
@@ -101,7 +282,7 @@
 
   /* Layout utilities for consistent containers */
   .page-container {
-    @apply max-w-2xl mx-auto px-container-padding;
+    @apply max-w-3xl mx-auto px-container-padding;
   }
 
   .section-container {
@@ -117,57 +298,67 @@
   .prose img {
     @apply max-w-md w-full h-auto mx-auto rounded-lg;
   }
+
+  /* Soft text shadow for headings */
+  .text-glow {
+    text-shadow: 0 0 40px rgba(var(--gradient-2), 0.3);
+  }
+
+  .dark .text-glow {
+    text-shadow: 0 0 40px rgba(var(--gradient-2), 0.4);
+  }
 }
 
-  h3 code {
-    @apply !text-lg md:!text-xl;
-  }
+h3 code {
+  @apply !text-lg md:!text-xl;
+}
 
-  pre {
-    @apply !px-0 rounded-lg overflow-x-auto py-4
-  }
+pre {
+  @apply !px-0 rounded-lg overflow-x-auto py-4
+}
 
-  pre [data-line] {
-    @apply px-4
-  }
+pre [data-line] {
+  @apply px-4
+}
 
-  code {
-    @apply text-sm md:text-base !leading-loose;
-  }
+code {
+  @apply text-sm md:text-base !leading-loose;
+}
 
-  pre > code {
-    counter-reset: line;
-  }
+pre>code {
+  counter-reset: line;
+}
+
+code[data-theme*=" "],
+code[data-theme*=" "] span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+@media (prefers-color-scheme: dark) {
 
   code[data-theme*=" "],
   code[data-theme*=" "] span {
-    color: var(--shiki-light);
-    background-color: var(--shiki-light-bg);
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg);
   }
+}
 
-  @media (prefers-color-scheme: dark) {
-    code[data-theme*=" "],
-    code[data-theme*=" "] span {
-      color: var(--shiki-dark);
-      background-color: var(--shiki-dark-bg);
-    }
-  }
+code[data-line-numbers] {
+  counter-reset: line;
+}
 
-  code[data-line-numbers] {
-    counter-reset: line;
-  }
+code[data-line-numbers]>[data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  @apply inline-block w-4 mr-4 text-right text-gray-500;
+}
 
-  code[data-line-numbers] > [data-line]::before {
-    counter-increment: line;
-    content: counter(line);
-    @apply inline-block w-4 mr-4 text-right text-gray-500;
-  }
+code {
+  counter-reset: line;
+}
 
-  code {
-    counter-reset: line;
-  }
-
-  code > [data-line]::before {
+code>[data-line]::before {
   counter-increment: line;
   content: counter(line);
 
@@ -179,21 +370,22 @@
   color: gray;
 }
 
-code[data-line-numbers-max-digits="2"] > [data-line]::before {
+code[data-line-numbers-max-digits="2"]>[data-line]::before {
   width: 2rem;
 }
 
-code[data-line-numbers-max-digits="3"] > [data-line]::before {
+code[data-line-numbers-max-digits="3"]>[data-line]::before {
   width: 3rem;
 }
 
 @theme inline {
   @keyframes orbit {
-  0% {
-    transform: rotate(calc(var(--angle) * 1deg)) translateY(calc(var(--radius) * 1px)) rotate(calc(var(--angle) * -1deg));
-        }
-  100% {
-    transform: rotate(calc(var(--angle) * 1deg + 360deg)) translateY(calc(var(--radius) * 1px)) rotate(calc((var(--angle) * -1deg) - 360deg));
-        }
+    0% {
+      transform: rotate(calc(var(--angle) * 1deg)) translateY(calc(var(--radius) * 1px)) rotate(calc(var(--angle) * -1deg));
     }
+
+    100% {
+      transform: rotate(calc(var(--angle) * 1deg + 360deg)) translateY(calc(var(--radius) * 1px)) rotate(calc((var(--angle) * -1deg) - 360deg));
+    }
+  }
 }
