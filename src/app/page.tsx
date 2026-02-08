@@ -364,7 +364,13 @@ export default function Page() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-4">
                     {DATA.books
                       .filter((themeGroup) => expandedBooks[themeGroup.theme])
-                      .flatMap((themeGroup) => themeGroup.books)
+                      .reduce<Array<{ title: string; author: string; number: number }>>((acc, themeGroup) => {
+                        return [...acc, ...themeGroup.books.map(book => ({
+                          title: book.title,
+                          author: book.author,
+                          number: book.number
+                        }))];
+                      }, [])
                       .map((book, index) => (
                         <motion.div
                           key={book.title}
