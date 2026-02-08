@@ -53,7 +53,7 @@ export default function Page() {
                 <AvatarFallback>{DATA.initials}</AvatarFallback>
               </Avatar>
             </BlurFade>
-            
+
             {/* Text content - shows second on mobile, left on desktop */}
             <div className="flex-col flex flex-1 space-y-3 items-center md:items-start text-center md:text-left md:order-1 w-full">
               <BlurFadeText
@@ -77,13 +77,13 @@ export default function Page() {
               <BlurFade delay={BLUR_FADE_DELAY * 6}>
                 <p className="text-muted-foreground text-base md:text-xl">
                   Currently building at{" "}
-                  <a 
-                    href="https://cognos-lab.com" 
-                    target="_blank" 
+                  <a
+                    href="https://coglixlabs.com"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="font-medium text-primary hover:text-primary/80 underline decoration-primary/40 underline-offset-2 hover:decoration-primary/60 transition-all duration-200"
                   >
-                    Cognos Labs
+                    Coglix Labs
                   </a>
                   .
                 </p>
@@ -124,13 +124,13 @@ export default function Page() {
                 className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground bg-muted/50 hover:bg-muted rounded-full transition-all duration-200"
               >
                 {aboutExpanded ? "Hide" : "Read more"}
-                <ChevronDown 
+                <ChevronDown
                   className={`w-3.5 h-3.5 transition-transform duration-200 ${aboutExpanded ? "rotate-180" : ""}`}
                 />
               </button>
             </div>
           </BlurFade>
-          
+
           <AnimatePresence>
             {aboutExpanded && (
               <motion.div
@@ -175,21 +175,21 @@ export default function Page() {
             <h2 className="text-xl font-bold">Cool Places I Worked At</h2>
           </BlurFade>
           <div className="divide-y divide-border/30">
-          {DATA.technicalExperience.map((work, id) => (
+            {DATA.technicalExperience.map((work, id) => (
               <BlurFade key={work.company} delay={BLUR_FADE_DELAY * 18 + id * 0.02}>
                 <TimelineItem
-                logoUrl={work.logoUrl}
-                altText={work.company}
-                title={work.company}
-                subtitle={work.title}
-                href={work.href}
-                badges={work.badges}
-                period={`${work.start} - ${work.end ?? "Present"}`}
-                bullets={work.bullets}
+                  logoUrl={work.logoUrl}
+                  altText={work.company}
+                  title={work.company}
+                  subtitle={work.title}
+                  href={work.href}
+                  badges={work.badges}
+                  period={`${work.start} - ${work.end ?? "Present"}`}
+                  bullets={work.bullets}
                   isLast={id === DATA.technicalExperience.length - 1}
-              />
-            </BlurFade>
-          ))}
+                />
+              </BlurFade>
+            ))}
           </div>
         </div>
       </section>
@@ -200,20 +200,20 @@ export default function Page() {
             <h2 className="text-xl font-bold">Education</h2>
           </BlurFade>
           <div className="divide-y divide-border/30">
-          {DATA.education.map((education, id) => (
+            {DATA.education.map((education, id) => (
               <BlurFade key={education.school} delay={BLUR_FADE_DELAY * 20 + id * 0.02}>
                 <TimelineItem
-                logoUrl={education.logoUrl}
-                altText={education.school}
-                title={education.school}
-                subtitle={education.degree}
+                  logoUrl={education.logoUrl}
+                  altText={education.school}
+                  title={education.school}
+                  subtitle={education.degree}
                   href={education.href}
-                period={`${education.start} - ${education.end}`}
+                  period={`${education.start} - ${education.end}`}
                   isLast={id === DATA.education.length - 1}
-              />
-            </BlurFade>
-          ))}
-        </div>
+                />
+              </BlurFade>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -237,7 +237,7 @@ export default function Page() {
               </div>
             </div>
           </BlurFade>
-          
+
           {/* Featured Projects (Craftscape HK & Truth or Dare) */}
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto">
             {featuredProjects.map((project, id) => (
@@ -267,7 +267,7 @@ export default function Page() {
                 className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground bg-muted/50 hover:bg-muted rounded-full transition-all duration-200"
               >
                 {projectsExpanded ? "Show less" : "Show more projects"}
-                <ChevronDown 
+                <ChevronDown
                   className={`w-4 h-4 transition-transform duration-200 ${projectsExpanded ? "rotate-180" : ""}`}
                 />
               </button>
@@ -341,7 +341,7 @@ export default function Page() {
                       </h3>
                       <span className="flex items-center gap-1.5 px-2 py-1 text-xs font-medium text-muted-foreground group-hover:text-foreground bg-muted/50 group-hover:bg-muted rounded-full transition-all duration-200">
                         {expandedBooks[themeGroup.theme] ? "Hide" : `${themeGroup.books.length} ${themeGroup.books.length === 1 ? "book" : "books"}`}
-                        <ChevronDown 
+                        <ChevronDown
                           className={`w-3 h-3 transition-transform duration-200 ${expandedBooks[themeGroup.theme] ? "rotate-180" : ""}`}
                         />
                       </span>
@@ -379,17 +379,17 @@ export default function Page() {
       <section id="hong-kong" className="mb-section-lg">
         <div className="space-y-content-lg">
           <BlurFade delay={BLUR_FADE_DELAY * 29}>
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
-            <div className="space-y-2">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                Best parts of Hong Kong.
-              </h2>
-              <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                A collection of my favorite spots and activities in the city I call home.
-              </p>
+            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+              <div className="space-y-2">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                  Best parts of Hong Kong.
+                </h2>
+                <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  A collection of my favorite spots and activities in the city I call home.
+                </p>
+              </div>
             </div>
-          </div>
-        </BlurFade>
+          </BlurFade>
           <HongKongMap delay={BLUR_FADE_DELAY * 30} />
         </div>
       </section>
@@ -397,17 +397,17 @@ export default function Page() {
       <section id="world" className="mb-section-lg">
         <div className="space-y-content-lg">
           <BlurFade delay={BLUR_FADE_DELAY * 31}>
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
-            <div className="space-y-2">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                World Map.
-              </h2>
-              <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Countries I&apos;ve visited and want to visit.
-              </p>
+            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+              <div className="space-y-2">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                  World Map.
+                </h2>
+                <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  Countries I&apos;ve visited and want to visit.
+                </p>
+              </div>
             </div>
-          </div>
-        </BlurFade>
+          </BlurFade>
           <WorldMap delay={BLUR_FADE_DELAY * 32} />
         </div>
       </section>
@@ -421,9 +421,9 @@ export default function Page() {
         </BlurFade>
         <BlurFade delay={BLUR_FADE_DELAY * 35}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img 
-            src="https://i.pinimg.com/originals/98/59/12/98591272861e66a02eecf5dae0450c73.gif" 
-            alt="Duolingo" 
+          <img
+            src="https://i.pinimg.com/originals/98/59/12/98591272861e66a02eecf5dae0450c73.gif"
+            alt="Duolingo"
             className="max-w-[300px] md:max-w-[500px] w-full"
           />
         </BlurFade>

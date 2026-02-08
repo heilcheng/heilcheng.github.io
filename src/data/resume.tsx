@@ -46,8 +46,8 @@ export const DATA = {
 
   technicalExperience: [
     {
-      company: "Cognos Labs",
-      href: "https://cognos-lab.com",
+      company: "Coglix Labs",
+      href: "https://coglixlabs.com",
       badges: [],
       location: "Hong Kong",
       title: "Member of Technical Staff",
